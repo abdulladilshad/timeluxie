@@ -13,4 +13,4 @@ const adminSchema = new mongoose.Schema({
     timestamps:true,
 })
 
- module.exports= mongoose.model('admin',adminSchema)
+ module.exports= mongoose.model('admin',adminSchema) 

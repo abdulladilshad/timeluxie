@@ -1,301 +1,846 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | Luxure Watch Collections</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/vendor.css" rel="stylesheet" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="/style.css" rel="stylesheet" type="text/css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Marcellus&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/homePage.css">
+  <title>The Journal | LUXE TIME</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
-    <style>
-        /* Remove navbar styles and add back to home button styles */
-        .back-to-home {
-            position: fixed;
-            top: 20px;
-            left: 20px;
-            z-index: 1000;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-family: 'Jost', sans-serif;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
+  <style>
+    :root {
+      --ivory: #F5F1EB;
+      --charcoal: #1A1A1A;
+      --gold: #C5A66E;
+      --warm-gray: #8C8C8C;
+      --font-serif: 'Playfair Display', serif;
+      --font-sans: 'Inter', sans-serif;
+    }
 
-        .back-to-home:hover {
-            background: rgba(0, 0, 0, 0.9);
-            color: #c0a080;
-            transform: translateY(-2px);
-        }
+    body {
+      background-color: var(--ivory);
+      color: var(--charcoal);
+      font-family: var(--font-sans);
+      margin: 0;
+      padding: 0;
+    }
 
-        .back-to-home i {
-            font-size: 1.1rem;
-        }
+    h1, h2, h3, h4, h5, h6, .serif {
+      font-family: var(--font-serif);
+    }
 
-        /* Remove navbar margin from blog header */
-        .blog-header {
-            margin-top: 0;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('/images/blog-header.jpg');
-            background-size: cover;
-            background-position: center;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            margin-bottom: 50px;
-        }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
 
-        .blog-header h1 {
-            font-family: 'Marcellus', serif;
-            font-size: 3.5rem;
-            margin-bottom: 20px;
-        }
+    /* 1. Top Bar & Navigation (Consistent with index.ejs) */
+    .top-bar {
+      background-color: var(--charcoal);
+      color: var(--ivory);
+      text-align: center;
+      padding: 8px 0;
+      font-size: 0.8rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 300;
+    }
 
-        .blog-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    .navbar-luxury {
+      background-color: var(--ivory);
+      padding: 20px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(26,26,26,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px); /* Add a slight "glasing" effect */
+      background-color: rgba(245, 241, 235, 0.9);
+    }
+    
+    .navbar-brand h1 {
+      margin: 0;
+      font-size: clamp(1.4rem, 2vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--charcoal);
+    }
 
-        .blog-post {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            margin-bottom: 30px;
-        }
+    .nav-links {
+      display: flex;
+      gap: 30px;
+    }
 
-        .blog-post:hover {
-            transform: translateY(-5px);
-        }
+    .nav-links a {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.3s;
+    }
 
-        .blog-post img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-        }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 1px;
+      bottom: -4px;
+      left: 0;
+      background-color: var(--gold);
+      transition: width 0.3s;
+    }
 
-        .blog-post-content {
-            padding: 25px;
-        }
+    .nav-links a:hover, .nav-links a.active {
+      color: var(--gold);
+    }
 
-        .blog-post h2 {
-            font-family: 'Jost', sans-serif;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-            color: #333;
-        }
+    .nav-links a:hover::after, .nav-links a.active::after {
+      width: 100%;
+    }
 
-        .blog-post h2 a {
-            color: #333;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
+    .nav-icons {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
 
-        .blog-post h2 a:hover {
-            color: #c0a080;
-        }
+    .nav-icons a {
+      font-size: 1.1rem;
+      transition: color 0.3s;
+    }
 
-        .blog-post p {
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
+    .nav-icons a:hover {
+      color: var(--gold);
+    }
+    
+    .profile-img-nav {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
 
-        .read-more {
-            display: inline-block;
-            padding: 10px 25px;
-            background: #c0a080;
-            color: white;
-            text-decoration: none;
-            border-radius: 25px;
-            transition: background 0.3s ease;
-        }
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      background: none;
+      border: none;
+      color: var(--charcoal);
+    }
 
-        .read-more:hover {
-            background: #a88860;
-            color: white;
-        }
+    @media (max-width: 991px) {
+      .nav-links { display: none; }
+      .nav-icons { display: none; }
+      .mobile-menu-btn { display: block; }
+    }
 
-        .blog-sidebar {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
+    /* Mobile Offcanvas Overrides */
+    .offcanvas {
+        background-color: var(--charcoal);
+        color: var(--ivory);
+    }
+    .offcanvas .btn-close {
+        filter: invert(1) grayscale(100%) brightness(200%);
+    }
+    .offcanvas a {
+        color: var(--ivory);
+        font-family: var(--font-serif);
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        display: block;
+    }
+    .offcanvas a:hover {
+        color: var(--gold);
+    }
 
-        .blog-sidebar h3 {
-            font-family: 'Jost', sans-serif;
-            font-size: 1.4rem;
-            margin-bottom: 20px;
-            color: #333;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #c0a080;
-        }
+    /* 2. Page Header */
+    .journal-header {
+      padding: 80px 5% 40px;
+      text-align: center;
+    }
 
-        .blog-sidebar ul {
-            list-style: none;
-            padding: 0;
-        }
+    .journal-header h1 {
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      margin-bottom: 15px;
+      color: var(--charcoal);
+      font-weight: 400;
+    }
 
-        .blog-sidebar ul li {
-            margin-bottom: 12px;
-        }
+    .journal-header p {
+      font-size: clamp(1rem, 1.5vw, 1.2rem);
+      color: var(--warm-gray);
+      font-weight: 300;
+      letter-spacing: 0.5px;
+    }
 
-        .blog-sidebar ul li a {
-            color: #666;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            display: flex;
-            align-items: center;
-        }
+    /* 4. Category Filter */
+    .category-filter {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      padding: 0 5% 40px;
+      border-bottom: 1px solid rgba(26,26,26,0.1);
+      margin-bottom: 60px;
+    }
 
-        .blog-sidebar ul li a:hover {
-            color: #c0a080;
-        }
+    .category-pill {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--warm-gray);
+      padding-bottom: 5px;
+      cursor: pointer;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
 
-        .blog-sidebar ul li a i {
-            margin-right: 10px;
-            color: #c0a080;
-        }
+    .category-pill:hover, .category-pill.active {
+      color: var(--charcoal);
+      border-bottom: 2px solid var(--gold);
+    }
 
-        .social-icons {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
+    @media (max-width: 768px) {
+      .category-filter {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 20px;
+        scrollbar-width: none; /* Firefox */
+      }
+      .category-filter::-webkit-scrollbar {
+        display: none; /* Chrome */
+      }
+      .category-pill {
+        padding-bottom: 10px;
+      }
+    }
 
-        .social-icons a {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f5f5f5;
-            border-radius: 50%;
-            color: #333;
-            transition: all 0.3s ease;
-        }
+    /* 3. Featured Article */
+    .featured-article {
+      padding: 0 5% 80px;
+      display: block;
+    }
 
-        .social-icons a:hover {
-            background: #c0a080;
-            color: white;
-            transform: translateY(-3px);
-        }
+    .featured-card {
+      position: relative;
+      width: 100%;
+      height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      text-decoration: none;
+    }
 
-        @media (max-width: 991px) {
-            .blog-header h1 {
-                font-size: 2.5rem;
-            }
-            
-            .blog-post img {
-                height: 250px;
-            }
-        }
-    </style>
+    .featured-image {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s ease;
+    }
+
+    .featured-card:hover .featured-image {
+      transform: scale(1.03);
+    }
+
+    .featured-overlay {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+    }
+
+    .featured-content {
+      position: relative;
+      z-index: 2;
+      padding: 60px;
+      color: var(--ivory);
+      max-width: 800px;
+    }
+
+    .category-tag {
+      color: var(--gold);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .featured-content h2 {
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .article-meta {
+      display: flex;
+      gap: 15px;
+      font-size: 0.85rem;
+      color: #CCC;
+      margin-bottom: 20px;
+      font-weight: 300;
+    }
+
+    .article-meta span {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .read-more-link {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--ivory);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 5px;
+      transition: color 0.3s, border-color 0.3s;
+      display: inline-block;
+    }
+
+    .featured-card:hover .read-more-link {
+      color: var(--gold);
+    }
+
+    @media (max-width: 768px) {
+      .featured-card {
+        height: auto;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .featured-image {
+        position: relative;
+        height: 300px;
+      }
+      .featured-overlay {
+        display: none;
+      }
+      .featured-content {
+        padding: 30px 0 0 0;
+        color: var(--charcoal);
+      }
+      .article-meta {
+        color: var(--warm-gray);
+      }
+      .read-more-link {
+        color: var(--charcoal);
+      }
+    }
+
+    /* 5. Article Grid */
+    .journal-grid {
+      padding: 0 5% 80px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .article-card {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      group: hover;
+    }
+
+    .article-image-wrapper {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      margin-bottom: 25px;
+    }
+
+    .article-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .article-card:hover .article-image {
+      transform: scale(1.05);
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      transition: transform 0.3s ease;
+    }
+
+    .article-card .category-tag {
+      margin-bottom: 10px;
+    }
+
+    .article-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.2rem, 1.5vw, 1.5rem);
+      color: var(--charcoal);
+      margin-bottom: 15px;
+      line-height: 1.3;
+    }
+
+    .article-excerpt {
+      color: var(--warm-gray);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .article-date {
+      font-size: 0.8rem;
+      color: #AAA;
+      font-weight: 300;
+      margin-top: auto;
+    }
+
+    @media (max-width: 991px) {
+      .journal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .journal-grid { grid-template-columns: 1fr; gap: 50px;}
+      .article-card:hover { transform: none; }
+    }
+
+    /* 6. Load More Button */
+    .load-more-container {
+      text-align: center;
+      padding: 0 5% 100px;
+    }
+
+    .btn-outline-gold {
+      background: transparent;
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 15px 40px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .btn-outline-gold:hover {
+      background: var(--gold);
+      color: var(--ivory);
+    }
+
+    @media (max-width: 768px) {
+      .btn-outline-gold { width: 100%; }
+    }
+
+    /* 7. Newsletter CTA */
+    .newsletter-cta {
+      background-color: var(--charcoal);
+      color: var(--ivory);
+      padding: 100px 5%;
+      text-align: center;
+    }
+
+    .newsletter-cta h2 {
+      font-size: clamp(2rem, 3vw, 3rem);
+      margin-bottom: 15px;
+      color: var(--ivory);
+    }
+
+    .newsletter-cta p {
+      color: #CCC;
+      margin-bottom: 40px;
+      font-weight: 300;
+      font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+    }
+
+    .newsletter-inline-form {
+      display: flex;
+      max-width: 600px;
+      margin: 0 auto;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .newsletter-inline-form input {
+      flex-grow: 1;
+      background: transparent;
+      border: none;
+      color: var(--ivory);
+      padding: 15px 10px 15px 0;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+    }
+
+    .newsletter-inline-form input:focus {
+      outline: none;
+    }
+
+    .newsletter-inline-form button {
+      background: transparent;
+      border: none;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      padding: 0 20px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .newsletter-inline-form button:hover {
+      color: var(--ivory);
+    }
+
+    @media (max-width: 768px) {
+      .newsletter-inline-form {
+        flex-direction: column;
+        border-bottom: none;
+        gap: 15px;
+      }
+      .newsletter-inline-form input {
+        border-bottom: 1px solid rgba(255,255,255,0.3);
+        padding: 15px;
+        text-align: center;
+      }
+      .newsletter-inline-form button {
+        background: var(--gold);
+        color: var(--ivory);
+        padding: 15px;
+        width: 100%;
+      }
+      .newsletter-inline-form button:hover {
+        background: #A38656;
+      }
+    }
+
+    /* 8. Footer (Consistent with index.ejs) */
+    .footer-luxury {
+      background-color: var(--charcoal);
+      color: var(--ivory);
+      padding: 80px 5% 40px 5%;
+      border-top: 1px solid rgba(255,255,255,0.05); /* Slight separation from newsletter */
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 2fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-col h4 {
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+      color: var(--gold);
+    }
+
+    .footer-col p, .footer-col a {
+      color: #999;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      transition: color 0.3s;
+    }
+
+    .footer-col a {
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    .footer-col a:hover {
+      color: var(--ivory);
+    }
+
+    .newsletter-form {
+      display: flex;
+      margin-top: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .newsletter-form input {
+      background: transparent;
+      border: none;
+      color: var(--ivory);
+      padding: 10px 0;
+      width: 100%;
+    }
+
+    .newsletter-form input:focus {
+      outline: none;
+    }
+
+    .newsletter-form button {
+      background: transparent;
+      border: none;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      padding: 0 10px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 20px;
+      margin-top: 30px;
+    }
+
+    .social-links a {
+      color: var(--ivory);
+      font-size: 1.2rem;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid rgba(197, 166, 110, 0.3);
+      padding-top: 30px;
+      font-size: 0.8rem;
+      color: #666;
+    }
+
+    @media (max-width: 991px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-luxury { padding: 60px 5% 30px 5%; }
+    }
+  </style>
 </head>
+
 <body>
-    <!-- Back to Home Button -->
-    <a href="/" class="back-to-home">
-        <i class="fas fa-home"></i>
-        Back to Home
+  <!-- 1. Top Bar -->
+  <div class="top-bar">
+    Free Worldwide Shipping | Authenticity Guaranteed
+  </div>
+
+  <!-- 2. Navigation -->
+  <nav class="navbar-luxury">
+    <div class="navbar-brand">
+      <a href="/"><h1>LUXE TIME</h1></a>
+    </div>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/shope">Shop</a>
+      <a href="/shope">Collections</a>
+      <a href="/blog" class="active">Blog</a>
+      <a href="/contact">Contact</a>
+    </div>
+    <div class="nav-icons">
+      <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
+      <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+      <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+      
+      <% if (typeof user !== 'undefined' && user) { %>
+        <a href="/profile" title="Profile">
+          <% if (user.image && user.image.length > 0) { %>
+            <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
+          <% } else { %>
+            <i class="fa-regular fa-user"></i>
+          <% } %>
+        </a>
+        <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+      <% } else { %>
+        <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+      <% } %>
+    </div>
+    
+    <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu Offcanvas -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+    <div class="offcanvas-header border-bottom border-secondary">
+      <h5 class="offcanvas-title serif">LUXE TIME</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column text-center mt-5">
+      <a href="/">Home</a>
+      <a href="/shope">Shop</a>
+      <a href="/shope">Collections</a>
+      <a href="/blog">Blog</a>
+      <a href="/contact">Contact</a>
+      <hr class="border-secondary my-4">
+      <div class="d-flex justify-content-center gap-4 mt-3">
+        <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
+        <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+        <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+        <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
+        <% if (typeof user !== 'undefined' && user) { %>
+            <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Header -->
+  <header class="journal-header">
+    <h1 class="serif">The Journal</h1>
+    <p>Chronicles of Horology, Craftsmanship, and Style</p>
+  </header>
+
+  <!-- Category Filter -->
+  <div class="category-filter">
+    <div class="category-pill active">All</div>
+    <div class="category-pill">Watch Guides</div>
+    <div class="category-pill">Brand Stories</div>
+    <div class="category-pill">Craftsmanship</div>
+    <div class="category-pill">News</div>
+  </div>
+
+  <!-- Featured Article -->
+  <section class="featured-article">
+    <a href="#" class="featured-card">
+      <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1887&auto=format&fit=crop" alt="The Evolution of the Tourbillon" class="featured-image">
+      <div class="featured-overlay"></div>
+      <div class="featured-content">
+        <span class="category-tag">Craftsmanship</span>
+        <h2 class="serif">The Evolution of the Tourbillon: From Pocket Watches to Modern Masterpieces</h2>
+        <div class="article-meta">
+          <span><i class="fa-regular fa-calendar"></i> October 15, 2024</span>
+          <span><i class="fa-regular fa-clock"></i> 8 Min Read</span>
+        </div>
+        <span class="read-more-link">Read More</span>
+      </div>
+    </a>
+  </section>
+
+  <!-- Article Grid -->
+  <section class="journal-grid">
+    <!-- Article 1 -->
+    <a href="#" class="article-card">
+      <div class="article-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop" alt="Iconic Dive Watches" class="article-image">
+      </div>
+      <span class="category-tag">Watch Guides</span>
+      <h3 class="article-title">Top 5 Iconic Dive Watches Every Collector Should Know</h3>
+      <p class="article-excerpt">Discover the history and enduring appeal of the world's most recognizable underwater timepieces that defined an era.</p>
+      <div class="article-date">October 10, 2024</div>
     </a>
 
-    <!-- Header -->
-    <header class="blog-header">
-        <div class="container">
-            <h1>Our Blog</h1>
-            <p class="lead">Discover the latest trends and insights in luxury watches</p>
+    <!-- Article 2 -->
+    <a href="#" class="article-card">
+      <div class="article-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=2070&auto=format&fit=crop" alt="The Art of Enameling" class="article-image">
+      </div>
+      <span class="category-tag">Brand Stories</span>
+      <h3 class="article-title">The Lost Art of Grand Feu Enameling in Modern Horology</h3>
+      <p class="article-excerpt">A deep dive into the painstaking process of creating vibrant, everlasting dials using techniques unchanged for centuries.</p>
+      <div class="article-date">October 05, 2024</div>
+    </a>
+
+    <!-- Article 3 -->
+    <a href="#" class="article-card">
+      <div class="article-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=1904&auto=format&fit=crop" alt="Geneva Watch Days 2024" class="article-image">
+      </div>
+      <span class="category-tag">News</span>
+      <h3 class="article-title">Highlights from Geneva Watch Days: What You Missed</h3>
+      <p class="article-excerpt">An exclusive look at the most exciting releases, unexpected trends, and groundbreaking innovations from this year's show.</p>
+      <div class="article-date">September 28, 2024</div>
+    </a>
+
+    <!-- Article 4 -->
+    <a href="#" class="article-card">
+      <div class="article-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1999&auto=format&fit=crop" alt="Investing in Vintage" class="article-image">
+      </div>
+      <span class="category-tag">Watch Guides</span>
+      <h3 class="article-title">A Beginner's Guide to Investing in Vintage Timepieces</h3>
+      <p class="article-excerpt">Navigating the complexities of the vintage market: what to look for, condition over rarity, and avoiding common pitfalls.</p>
+      <div class="article-date">September 20, 2024</div>
+    </a>
+
+    <!-- Article 5 -->
+    <a href="#" class="article-card">
+      <div class="article-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=2127&auto=format&fit=crop" alt="Mechanical Movements" class="article-image">
+      </div>
+      <span class="category-tag">Craftsmanship</span>
+      <h3 class="article-title">Understanding the Anatomy of a Mechanical Movement</h3>
+      <p class="article-excerpt">Breaking down the intricate components that bring a mechanical watch to life, from the mainspring to the escapement.</p>
+      <div class="article-date">September 12, 2024</div>
+    </a>
+
+    <!-- Article 6 -->
+    <a href="#" class="article-card">
+      <div class="article-image-wrapper">
+        <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=2070&auto=format&fit=crop" alt="Independent Watchmakers" class="article-image">
+      </div>
+      <span class="category-tag">Brand Stories</span>
+      <h3 class="article-title">The Rise of Independent Watchmakers in the 21st Century</h3>
+      <p class="article-excerpt">How small, artisanal brands are challenging industry giants with unconventional designs and uncompromising finishing.</p>
+      <div class="article-date">September 05, 2024</div>
+    </a>
+  </section>
+
+  <!-- Load More -->
+  <div class="load-more-container">
+    <button class="btn-outline-gold">Load More Articles</button>
+  </div>
+
+  <!-- Newsletter CTA -->
+  <section class="newsletter-cta">
+    <h2 class="serif">Stay Informed</h2>
+    <p>Join our newsletter for the latest stories, guides, and exclusive horological insights.</p>
+    <form class="newsletter-inline-form">
+      <input type="email" placeholder="Enter your email address" required>
+      <button type="submit">Subscribe</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-luxury">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h2 class="serif" style="color: var(--ivory); margin-bottom: 20px;">LUXE TIME</h2>
+        <p>Curators of fine timepieces. We believe that a watch is more than an accessory; it is a legacy passed down through generations. Authenticity and excellence guaranteed.</p>
+        <div class="social-links">
+          <a href="#"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-pinterest-p"></i></a>
         </div>
-    </header>
-
-    <!-- Main Content -->
-    <div class="blog-container">
-        <div class="row">
-            <!-- Blog Posts -->
-            <div class="col-lg-8">
-                <!-- Blog Post 1 -->
-                <article class="blog-post">
-                    <img src="/images/blog1.jpg" alt="Luxury Watch Trends 2025">
-                    <div class="blog-post-content">
-                        <h2><a href="#">Luxury Watch Trends for 2025</a></h2>
-                        <p>Explore the latest trends in luxury watches for 2025, including smart features, materials, and timeless designs that are shaping the future of horology.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 2 -->
-                <article class="blog-post">
-                    <img src="/images/blog2.jpg" alt="How to Choose a Luxury Watch">
-                    <div class="blog-post-content">
-                        <h2><a href="#">How to Choose a Luxury Watch</a></h2>
-                        <p>A comprehensive guide on selecting the perfect luxury watch that matches your style, personality, and investment goals.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-
-                <!-- Blog Post 3 -->
-                <article class="blog-post">
-                    <img src="/images/blog3.jpg" alt="Top 10 Swiss Watch Brands">
-                    <div class="blog-post-content">
-                        <h2><a href="#">Top 10 Swiss Watch Brands You Must Know</a></h2>
-                        <p>Discover the best Swiss watch brands that define elegance, craftsmanship, and innovation in the world of luxury timepieces.</p>
-                        <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </article>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-                <aside class="blog-sidebar">
-                    <h3>Categories</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-clock"></i> Luxury Watches</a></li>
-                        <li><a href="#"><i class="fas fa-book"></i> Buying Guides</a></li>
-                        <li><a href="#"><i class="fas fa-tools"></i> Watch Maintenance</a></li>
-                        <li><a href="#"><i class="fas fa-star"></i> New Releases</a></li>
-                    </ul>
-
-                    <h3>Recent Posts</h3>
-                    <ul>
-                        <li><a href="#"><i class="fas fa-crown"></i> The Most Expensive Watches in the World</a></li>
-                        <li><a href="#"><i class="fas fa-wrench"></i> How to Maintain Your Luxury Watch</a></li>
-                        <li><a href="#"><i class="fas fa-chart-line"></i> Best Investment Watches in 2024</a></li>
-                    </ul>
-
-                    <h3>Follow Us</h3>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </aside>
-            </div>
-        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Customer Care</h4>
+        <a href="/contact">Contact Us</a>
+        <a href="#">Shipping & Returns</a>
+        <a href="#">Warranty</a>
+        <a href="#">FAQ</a>
+        <a href="#">Watch Care Guide</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <a href="/shope">Shop All</a>
+        <a href="/shope">New Arrivals</a>
+        <a href="#">Pre-Owned</a>
+        <a href="/blog">The Journal</a>
+        <a href="#">Our Story</a>
+      </div>
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <p>Subscribe to receive updates, access to exclusive deals, and more.</p>
+        <form class="newsletter-form">
+          <input type="email" placeholder="ENTER YOUR EMAIL" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </div>
     </div>
+    <div class="footer-bottom">
+      <p>&copy; <%= new Date().getFullYear() %> Luxe Time World. All Rights Reserved. Designed with elegance.</p>
+    </div>
+  </footer>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0">&copy; 2025 Luxure Watch Collections. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

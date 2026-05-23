@@ -19,6 +19,12 @@ const categorySchema = new mongoose.Schema(
       max: 100,
       default: 0,
     },
+    style: {
+      type: String,
+      enum: ['Mens', 'Womens', ''],
+      default: '',
+      trim: true
+    },
     isdelete: {
       type: Boolean,
       default: false,

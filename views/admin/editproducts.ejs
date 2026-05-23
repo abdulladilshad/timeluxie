@@ -91,7 +91,7 @@
                         <select id="category" name="category">
                             <% categories.forEach(category=> { %>
                                 <option value="<%= category._id %>"
-                                    <%=category._id.toString()===products.category.toString() ? "selected" : "" %>>
+                                    <%= products.category && category._id.toString() === products.category.toString() ? "selected" : "" %>>
                                     <%= category.name %>
                                 </option>
                                 <% }) %>

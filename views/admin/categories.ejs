@@ -58,6 +58,7 @@
                             <th>#</th>
                             <th>Category Name</th>
                             <th>Description</th>
+                            <th>Style</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -69,6 +70,7 @@
                                     <td><%= index + 1 %></td>
                                     <td><strong><%= category?.name %></strong></td>
                                     <td><%= category?.description %></td>
+                                    <td><%= category?.style || 'None' %></td>
                                     <td>
                                         <span class="status-badge <%= category.isdelete ? 'status-inactive' : 'status-active' %>">
                                             <%= category.isdelete ? 'Inactive' : 'Active' %>

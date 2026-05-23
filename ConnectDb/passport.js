@@ -26,24 +26,33 @@ passport.use(new GoogleStrategy({
         let user = await User.findOne({ 
             $or: [
                 { googleId: profile.id },
-                { email: profile.emails[0].value },
-                {image: profile.photos[0].value}
-            ]
+                { email: profile.emails && profile.emails[0].value }
+            ].filter(condition => condition.email !== undefined) 
         });
-
 
         if (!user) {
             user = new User({
+                googleId: profile.id,
                 name: profile.displayName,
-                email: profile.emails[0].value,
-                image: profile.photos[0].value,
-                isVerified: true // Add email verification status
+                email: profile.emails ? profile.emails[0].value : undefined,
+                image: profile.photos ? [profile.photos[0].value] : [],
+                isVerified: true
             });
             await user.save();
-        }else {
-            // Update existing user with Google avatar if not already set
-            if (!user.image) {
-                user.image = profile.photos[0].value;
+        } else {
+            // Update existing user with Google info if missing
+            let updated = false;
+            if (!user.googleId) {
+                user.googleId = profile.id;
+                updated = true;
+            }
+            if (!user.image || user.image.length === 0) {
+                if (profile.photos && profile.photos[0].value) {
+                    user.image = [profile.photos[0].value];
+                    updated = true;
+                }
+            }
+            if (updated) {
                 await user.save();
             }
         }

@@ -345,7 +345,14 @@ const LoadProducts = async (req, res) => {
 
 const renderAddProduct = async (req, res) => {
     try {
-        const categories = await categoryModel.find({});
+        let categories = await categoryModel.find({});
+        if (categories.length === 0) {
+            const mens = new categoryModel({ name: 'Mens', description: 'Mens Collection', style: 'Mens' });
+            const womens = new categoryModel({ name: 'Womens', description: 'Womens Collection', style: 'Womens' });
+            await mens.save();
+            await womens.save();
+            categories = [mens, womens];
+        }
 
 
         res.render('admin/addproducts', { categories, error: '' });
@@ -387,11 +394,6 @@ const addProduct = async (req, res) => {
 
         if (!productName) {
             return res.status(400).send("Product name is required.");
-        }
-
-        const productCount = await productModel.countDocuments();
-        if (productCount < 2) {
-            return res.status(403).send("At least 2 products must exist before adding a new one.");
         }
 
         const existingProduct = await productModel.findOne({
@@ -504,7 +506,7 @@ const LoadCategory = async (req, res) => {
 
 const postAddCategory = async (req, res) => {
     try {
-        const { name, description, offer } = req.body;
+        const { name, description, offer, style } = req.body;
 
         
         if (!name || !description) {
@@ -524,7 +526,8 @@ const postAddCategory = async (req, res) => {
         const newCategory = new categoryModel({ 
             name, 
             description, 
-            offer: categoryOffer 
+            offer: categoryOffer,
+            style: style || ''
         });
 
         await newCategory.save();
@@ -552,7 +555,7 @@ const AddCategory = async (req, res) => {
 const editCategory = async (req, res) => {
     try {
         const categoryId = req.params.id;
-        const { name, description, offer } = req.body;
+        const { name, description, offer, style } = req.body;
 
         
         const categoryOffer = offer && !isNaN(offer) ? Number(offer) : 0;
@@ -571,7 +574,7 @@ const editCategory = async (req, res) => {
         }
 
         
-        await categoryModel.findByIdAndUpdate(categoryId, { name, description, offer: categoryOffer });
+        await categoryModel.findByIdAndUpdate(categoryId, { name, description, offer: categoryOffer, style: style || '' });
 
         res.redirect('/admin/categories?success=Category updated successfully.');
     } catch (error) {
@@ -647,7 +650,14 @@ const editproducts = async (req, res) => {
     
 
 
-        const categories = await categoryModel.find({})
+        let categories = await categoryModel.find({});
+        if (categories.length === 0) {
+            const mens = new categoryModel({ name: 'Mens', description: 'Mens Collection', style: 'Mens' });
+            const womens = new categoryModel({ name: 'Womens', description: 'Womens Collection', style: 'Womens' });
+            await mens.save();
+            await womens.save();
+            categories = [mens, womens];
+        }
         res.render('admin/editproducts', { categories, products, errorMessage: '' })
     }
     catch (er) {
@@ -802,7 +812,6 @@ const searchProducts = async (req, res) => {
         res.status(500).json({ error: 'Failed to search products' });
     }
 };
-
 module.exports = {
     editproducttt,
     editproducts,

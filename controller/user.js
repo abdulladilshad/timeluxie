@@ -289,10 +289,11 @@ const loadhome = async (req, res) => {
         const products = await productModel.find({ isDelete: false }).sort({ _id: -1 });
 
         const categories = await categoryModel.find({isdelete:false})
-        const user = await userschema.findOne({_id: req.session.user.id}, 'image');
-        
-        
-        
+        let user = null;
+        if (req.session.user?.id) {
+            user = await userschema.findOne({ _id: req.session.user.id }, 'image');
+        }
+
         res.render('user/index', { categories,products, user })
           
 
@@ -354,6 +355,11 @@ const Loadshope = async (req, res) => {
             .find({ isdelete: false })
             .lean();
 
+        let user = null;
+        if (req.session.user && req.session.user.id) {
+            user = await userschema.findOne({ _id: req.session.user.id }, 'name image');
+        }
+
         res.render('user/shope', {
             categories,
             products,
@@ -362,12 +368,13 @@ const Loadshope = async (req, res) => {
             totalItems,
             itemsPerPage,
             selectedCategory: category,
-            title: 'Shop - LUXE TIME WORLD'
+            title: 'Shop - LUXE TIME WORLD',
+            user
         });
 
     } catch (error) {
         console.error('Error in Loadshope:', error);
-        res.redirect('/shope');
+        res.redirect('/');
     }
 };
 

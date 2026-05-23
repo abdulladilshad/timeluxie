@@ -130,13 +130,6 @@ const placeOrder = async (req, res) => {
     try {
         const userId = req.session.user.id;
         const { addressId, paymentMethod, newAddress, couponCode, cartTotal } = req.body;
-        
-        
-        console.log(cartTotal, "cartttttaaffffffffffffffffffffffffffffff");
-        console.log(couponCode, "couponCodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-        console.log(req.body, "bodyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
-        
-        
 
         const cartData = await cartModel.findOne({ userId }).populate("items.productId");
 

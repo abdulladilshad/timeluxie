@@ -59,7 +59,7 @@ router.get('/auth/google/callback',
     req.session.user = {
       id: req.user.id,
       email: req.user.email,
-      name: req.user.displayName
+      name: req.user.name
     };
 
 
