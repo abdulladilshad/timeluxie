@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="en">
 
 <head>
     <title>Product Details - Kaira Fashion Store</title>
@@ -222,205 +222,129 @@
             background: #000;
         }
         
-        /* Hamburger menu styles */
-        .hamburger-menu {
-          display: none;
+        :root {
+            --ivory: #F5F1EB;
+            --charcoal: #1A1A1A;
+            --gold: #C5A66E;
+            --warm-gray: #8C8C8C;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
         }
-        
-        /* Desktop navbar styles */
-        @media (min-width: 992px) {
-          .navbar-nav {
-            margin: 0 auto;
-          }
-          
-          .nav-icons-desktop {
-            display: flex;
-            align-items: center;
-            margin-right: auto;
-          }
-          
-          .nav-icons-desktop .nav-icon {
-            margin-right: 15px;
-            color: #333;
-            font-size: 18px;
-          }
+
+        body {
+            background-color: var(--ivory);
+            color: var(--charcoal);
+            font-family: var(--font-sans);
+            margin: 0;
+            padding: 0;
         }
-        
+
+        h1, h2, h3, h4, h5, h6, .serif { font-family: var(--font-serif); }
+        a { text-decoration: none; color: inherit; }
+
+        /* Navbar */
+        .top-bar {
+            background-color: var(--charcoal); color: var(--ivory); text-align: center;
+            padding: 8px 0; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 300;
+        }
+        .navbar-luxury {
+            background-color: var(--ivory); padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(26,26,26,0.1); position: sticky; top: 0; z-index: 1000;
+        }
+        .navbar-brand h1 { margin: 0; font-size: 1.8rem; font-weight: 700; letter-spacing: 2px; color: var(--charcoal); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; position: relative; transition: color 0.3s; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: var(--gold); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-icons { display: flex; gap: 20px; align-items: center; }
+        .nav-icons a { font-size: 1.1rem; transition: color 0.3s; cursor: pointer; }
+        .nav-icons a:hover { color: var(--gold); }
+        .profile-img-nav { width: 25px; height: 25px; border-radius: 50%; object-fit: cover; }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: var(--charcoal); }
+
         @media (max-width: 991px) {
-          .navbar > .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: nowrap;
-          }
-          
-          .navbar-brand {
-            flex: 0 0 auto;
-            margin-right: 165px;
-          }
-          
-          .hamburger-menu {
-            display: block;
-            width: 30px;
-            height: 20px;
-            position: relative;
-            cursor: pointer;
-            z-index: 1000;
-          }
-          
-          .hamburger-menu span {
-            display: block;
-            position: absolute;
-            height: 3px;
-            width: 100%;
-            background: #333;
-            border-radius: 3px;
-            opacity: 1;
-            left: 0;
-            transform: rotate(0deg);
-            transition: .25s ease-in-out;
-          }
-          
-          .hamburger-menu span:nth-child(1) {
-            top: 0px;
-          }
-          
-          .hamburger-menu span:nth-child(2) {
-            top: 8px;
-          }
-          
-          .hamburger-menu span:nth-child(3) {
-            top: 16px;
-          }
-          
-          .hamburger-menu.open span:nth-child(1) {
-            top: 8px;
-            transform: rotate(135deg);
-          }
-          
-          .hamburger-menu.open span:nth-child(2) {
-            opacity: 0;
-            left: -60px;
-          }
-          
-          .hamburger-menu.open span:nth-child(3) {
-            top: 8px;
-            transform: rotate(-135deg);
-          }
-          
-          #navbarContent {
-            position: fixed;
-            top: 80px;
-            left: -100%;
-            width: 100%;
-            height: calc(100vh - 80px);
-            background: white;
-            overflow-y: auto;
-            transition: 0.3s ease-in-out;
-            padding: 20px;
-            z-index: 999;
-          }
-          
-          #navbarContent.show {
-            left: 0;
-          }
-          
-          .navbar-nav {
-            flex-direction: column;
-            width: 100%;
-          }
-          
-          .nav-item {
-            margin: 10px 0;
-          }
-          
-          .nav-link {
-            font-size: 18px;
-          }
-          
-          .nav-icons {
-            margin-top: 20px;
-            justify-content: flex-start !important;
-            order: 2;
-            display: flex;
-            padding-right: 85px;
-            border-top: 1px solid rgba(0,0,0,0.1);
-            padding-top: 15px;
-            width: 100%;
-          }
-          
-          .nav-icon {
-            margin-right: 20px;
-            font-size: 20px;
-            color: #333;
-          }
+            .nav-links { display: none; }
+            .nav-icons { display: none; }
+            .mobile-menu-btn { display: block; }
         }
+        .offcanvas { background-color: var(--charcoal); color: var(--ivory); }
+        .offcanvas .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+        .offcanvas a { color: var(--ivory); font-family: var(--font-serif); font-size: 1.5rem; margin-bottom: 20px; display: block; }
+        .offcanvas a:hover { color: var(--gold); }
+
+        /* Search Input Overlay */
+        .search-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26,26,26,0.95);
+            z-index: 1100; display: none; justify-content: center; align-items: center; flex-direction: column;
+        }
+        .search-overlay.active { display: flex; }
+        .search-box-large { width: 80%; max-width: 600px; border: none; border-bottom: 2px solid var(--gold); background: transparent; color: var(--ivory); font-size: 2rem; padding: 10px 0; outline: none; text-align: center; font-family: var(--font-serif); }
+        .search-box-large::placeholder { color: rgba(245,241,235,0.5); }
+        .close-search { position: absolute; top: 30px; right: 40px; color: var(--ivory); font-size: 2rem; cursor: pointer; }
     </style>
 </head>
 
 <body>
    
-    <nav class="navbar navbar-expand-lg fixed-top bg-white">
-        <div class="container">
-            <!-- Icons for desktop view - on the left side -->
-            <div class="d-none d-lg-flex nav-icons-desktop">
-                <a href="/wishlist" class="nav-icon" title="Wishlist">
-                    <i class="fas fa-heart"></i>
-                </a>
-                <a href="/cart" class="nav-icon" title="Cart">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-                <a href="/profile" class="nav-icon" title="Account">
-                    <i class="fas fa-user"></i>
-                </a>
-            </div>
-            
-            <!-- Custom Hamburger Menu for Mobile -->
-            <div class="hamburger-menu d-lg-none">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            
-            <!-- Navigation Content -->
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <!-- Main Menu -->
-                <ul class="navbar-nav mx-auto text-uppercase">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">HOME</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="/shop">SHOP</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/blog">BLOG</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/contact">CONTACT</a>
-                    </li>
-                </ul>
-                
-                <!-- Icons for mobile view only - shown below menu -->
-                <div class="d-lg-none nav-icons">
-                    <a href="/wishlist" class="nav-icon" title="Wishlist">
-                        <i class="fas fa-heart"></i>
-                    </a>
-                    <a href="/cart" class="nav-icon" title="Cart">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <a href="/profile" class="nav-icon" title="Account">
-                        <i class="fas fa-user"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Brand on right side -->
-            <a class="navbar-brand ms-auto" href="/">
-                LUXE TIME
-                <span class="brand-dot"></span>
-            </a>
+    <!-- Top Bar -->
+    <div class="top-bar">Free Worldwide Shipping | Authenticity Guaranteed</div>
+
+    <!-- Navigation -->
+    <nav class="navbar-luxury">
+        <div class="navbar-brand"><a href="/"><h1>LUXE TIME</h1></a></div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shop">Shop</a>
+            <a href="/shop">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
         </div>
+        <div class="nav-icons">
+            <a onclick="document.getElementById('searchOverlay').classList.add('active'); document.getElementById('mainSearch').focus();" style="cursor:pointer;"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+            <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/profile" title="Profile">
+                    <% if (user.image && user.image.length > 0) { %>
+                        <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
+                    <% } else { %>
+                        <i class="fa-regular fa-user"></i>
+                    <% } %>
+                </a>
+                <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <% } else { %>
+                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+            <% } %>
+        </div>
+        <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"><i class="fa-solid fa-bars"></i></button>
     </nav>
+
+    <!-- Mobile Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title" style="font-family: var(--font-serif);">LUXE TIME</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column text-center mt-5">
+            <a href="/">Home</a><a href="/shop">Shop</a><a href="/shop">Collections</a><a href="/blog">Blog</a><a href="/contact">Contact</a>
+            <a href="/cart">Cart</a><a href="/wishlist">Wishlist</a>
+            <hr class="border-secondary my-4">
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <a onclick="document.getElementById('searchOverlay').classList.add('active');" style="cursor:pointer;"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
+                <% if (typeof user !== 'undefined' && user) { %> <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a> <% } %>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <i class="fa-solid fa-xmark close-search" onclick="document.getElementById('searchOverlay').classList.remove('active');"></i>
+        <input type="text" id="mainSearch" class="search-box-large" placeholder="Type to search...">
+    </div>
 
     <div class="container-fluid py-5">
         <div class="product-container">
@@ -833,40 +757,7 @@ async function addToCart(productId) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- Hamburger Menu Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const hamburgerMenu = document.querySelector('.hamburger-menu');
-            const navbarContent = document.getElementById('navbarContent');
-            
-            hamburgerMenu.addEventListener('click', function() {
-                this.classList.toggle('open');
-                navbarContent.classList.toggle('show');
-                document.body.classList.toggle('menu-open');
-            });
-            
-            
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    hamburgerMenu.classList.remove('open');
-                    navbarContent.classList.remove('show');
-                    document.body.classList.remove('menu-open');
-                });
-            });
-            
-    
-            document.addEventListener('click', function(event) {
-                if (!event.target.closest('.navbar') && 
-                    !event.target.closest('#navbarContent') && 
-                    navbarContent.classList.contains('show')) {
-                    hamburgerMenu.classList.remove('open');
-                    navbarContent.classList.remove('show');
-                    document.body.classList.remove('menu-open');
-                }
-            });
-        });
-    </script>
+
 </body>
 
 </html>

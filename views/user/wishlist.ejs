@@ -1,422 +1,429 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Wishlist | LUXE TIME</title>
+    <title>Your Wishlist | LUXE TIME</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/styles/wishlist.css">
+    <link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <style>
+        :root {
+            --gold: #d4af37;
+            --gold-hover: #b5952f;
+            --warm-gray: #8c8c8c;
+            --dark: #1a1a1a;
+            --light-bg: #fdfbf7;
+        }
+
         body {
-            padding-top: 80px;
-         
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            min-height: 100vh;
+            color: var(--dark);
         }
 
-        
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            height: 80px;
-        }
-
-        .navbar-brand {
+        .serif {
             font-family: 'Marcellus', serif;
-            font-size: 1.8rem;
-            color: #1a1a1a;
-            position: relative;
         }
 
-        .brand-dot {
-            position: absolute;
-            right: -12px;
-            bottom: 8px;
-            width: 8px;
-            height: 8px;
-            background: #1a1a1a;
-            border-radius: 50%;
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            border-radius: 16px;
         }
 
-        .navbar-nav .nav-link {
-            font-size: 0.9rem;
-            font-weight: 500;
-            padding: 0.5rem 1.2rem !important;
-            position: relative;
+        /* Navbar */
+        .top-bar {
+            background-color: var(--dark); color: var(--light-bg); text-align: center;
+            padding: 8px 0; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 300;
         }
-
-        .navbar-nav .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 0;
-            height: 2px;
-            background: #1a1a1a;
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
+        .navbar-luxury {
+            background-color: rgba(255, 255, 255, 0.95); padding: 20px 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(26,26,26,0.1); position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(10px);
         }
+        .navbar-brand h1 { margin: 0; font-size: 1.8rem; font-family: 'Marcellus', serif; color: var(--dark); }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500; position: relative; transition: color 0.3s; text-decoration: none; color: var(--dark); }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 1px; bottom: -4px; left: 0; background-color: var(--gold); transition: width 0.3s; }
+        .nav-links a:hover { color: var(--gold); }
+        .nav-links a:hover::after { width: 100%; }
+        .nav-icons { display: flex; gap: 20px; align-items: center; }
+        .nav-icons a { font-size: 1.1rem; transition: color 0.3s; cursor: pointer; color: var(--dark); text-decoration: none; position: relative; }
+        .nav-icons a:hover { color: var(--gold); }
+        .profile-img-nav { width: 25px; height: 25px; border-radius: 50%; object-fit: cover; }
+        .mobile-menu-btn { display: none; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: var(--dark); }
 
-        .navbar-nav .nav-link:hover::after,
-        .navbar-nav .nav-link.active::after {
-            width: 80%;
-
+        /* Search Input Overlay */
+        .search-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(26,26,26,0.95);
+            z-index: 1100; display: none; justify-content: center; align-items: center; flex-direction: column;
         }
+        .search-overlay.active { display: flex; }
+        .search-box-large { width: 80%; max-width: 600px; border: none; border-bottom: 2px solid var(--gold); background: transparent; color: var(--light-bg); font-size: 2rem; padding: 10px 0; outline: none; text-align: center; font-family: 'Marcellus', serif; }
+        .search-box-large::placeholder { color: rgba(253,251,247,0.5); }
+        .close-search { position: absolute; top: 30px; right: 40px; color: var(--light-bg); font-size: 2rem; cursor: pointer; }
 
-        .nav-icons {
+        /* Header */
+        .page-header {
             display: flex;
-            align-items: center;
-            gap: 1.5rem;
+            align-items: baseline;
+            gap: 15px;
+            margin: 40px 0 30px;
+        }
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            color: var(--dark);
+        }
+        .item-count {
+            color: var(--warm-gray);
+            font-size: 1.1rem;
+            font-weight: 400;
         }
 
-        .nav-icon {
-            color: #1a1a1a;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            position: relative;
+        /* Wishlist Grid */
+        .wishlist-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+            margin-bottom: 50px;
         }
-
-        .nav-icon:hover {
-            color: #666;
-            transform: translateY(-2px);
-        }
-
-        .icon-badge {
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #1a1a1a;
-            color: white;
-            font-size: 0.7rem;
-            padding: 0.2rem 0.5rem;
-            border-radius: 50%;
-            min-width: 18px;
-            height: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        
-        .navbar-toggler {
-            border: none;
-            padding: 0;
-            width: 30px;
-            height: 20px;
-            position: relative;
-        }
-
-        .toggler-icon {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: #1a1a1a;
-            transition: all 0.3s ease;
-        }
-
-        .toggler-icon::before,
-        .toggler-icon::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: #1a1a1a;
-            transition: all 0.3s ease;
-        }
-
-        .toggler-icon::before {
-            top: -6px;
-        }
-
-        .toggler-icon::after {
-            bottom: -6px;
-        }
-
-        
-        @media (max-width: 991px) {
-            .navbar-collapse {
-                padding: 1rem;
-                margin-top: 0.5rem;
-            }
-
-            .nav-icons {
-                margin-top: 1rem;
-                justify-content: center;
-            }
-
-            .navbar-nav {
-                text-align: center;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes shimmer {
-            0% {
-                background-position: -1000px 0;
-            }
-
-            100% {
-                background-position: 1000px 0;
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Wishlist Styles */
-        .wishlist-container {
-            padding: 30px 0;
-        }
-
-        .wishlist-header {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-        }
-
-        .wishlist-item {
-            display: flex;
-            margin-bottom: 20px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-
-        .wishlist-item-image {
-            width: 120px;
-            height: 120px;
-            object-fit: cover;
-            margin-right: 20px;
-        }
-
-        .wishlist-item-details {
-            flex-grow: 1;
-        }
-
-        .wishlist-item-actions {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .empty-wishlist {
+        .wishlist-card {
+            padding: 20px;
             text-align: center;
-            padding: 50px 0;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .empty-wishlist i {
-            font-size: 50px;
-            color: #ccc;
+        .wishlist-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+        
+        .heart-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        .product-img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background: #fff;
+        }
+        
+        .product-brand {
+            font-variant: small-caps;
+            color: var(--warm-gray);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+        
+        .product-name {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+            flex-grow: 1; /* Pushes bottom elements down */
+        }
+        
+        .product-price {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
             margin-bottom: 20px;
         }
 
-        .color-circle {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            margin-left: 10px;
-            vertical-align: middle;
+        /* Buttons */
+        .btn-outline-gold {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: all 0.3s;
+            width: 100%;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+        .btn-outline-gold:hover {
+            background: var(--gold);
+            color: white;
+        }
+        
+        .btn-remove-link {
+            background: none;
+            border: none;
+            color: var(--warm-gray);
+            font-size: 0.85rem;
+            text-decoration: underline;
+            transition: color 0.3s;
+        }
+        .btn-remove-link:hover {
+            color: #dc3545;
         }
 
+        .gold-btn {
+            background: var(--gold);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            text-decoration: none;
+        }
+        .gold-btn:hover {
+            background: var(--gold-hover);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
 
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            margin: 40px 0;
+        }
+        .empty-state i {
+            font-size: 4rem;
+            color: rgba(212, 175, 55, 0.5);
+            margin-bottom: 25px;
+        }
+        .empty-state h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        .empty-state p {
+            color: var(--warm-gray);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Pagination */
         .pagination {
             display: flex;
             justify-content: center;
-            margin-top: 20px;
+            margin-top: 40px;
+            margin-bottom: 60px;
             gap: 10px;
         }
-
-        .pagination a,
-        .pagination span {
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
+        .pagination a, .pagination span {
+            padding: 10px 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 8px;
             text-decoration: none;
-            color: #007bff;
+            color: var(--dark);
+            background: rgba(255,255,255,0.5);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s;
+        }
+        .pagination a:hover {
+            background: var(--gold);
+            color: white;
+            border-color: var(--gold);
         }
 
-        .pagination a:hover {
-            background-color: #007bff;
-            color: #fff;
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .wishlist-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+        
+        @media (max-width: 991px) {
+            .nav-links { display: none; }
+            .nav-icons { display: none; }
+            .mobile-menu-btn { display: block; }
+        }
+
+        @media (max-width: 768px) {
+            .wishlist-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
+            .product-img { height: 180px; }
+            .product-name { font-size: 1.1rem; }
+            .btn-outline-gold { padding: 8px 10px; font-size: 0.8rem; }
+        }
+        
+        @media (min-width: 992px) {
         }
     </style>
 </head>
-
 <body>
-    
-    <nav class="navbar navbar-expand-lg fixed-top bg-white">
-        <div class="container">
-            
-            <a class="navbar-brand" href="/">
-                LUXE TIME
-                <span class="brand-dot"></span>
-            </a>
 
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <span class="toggler-icon"></span>
-            </button>
+    <!-- Top Bar -->
+    <div class="top-bar">Free Worldwide Shipping | Authenticity Guaranteed</div>
 
-            
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav mx-auto text-uppercase">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/shope">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/men">Men</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/women">Women</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/limited-edition">Limited Edition</a>
-                    </li>
-                </ul>
-            </div>
-
-            
-            <div class="nav-icons">
-                <a href="/search" class="nav-icon" title="Search">
-                    <i class="fas fa-search"></i>
-                </a>
-                <a href="/wishlist" class="nav-icon" title="Wishlist">
-                    <i class="fas fa-heart"></i>
-                </a>
-                <a href="/cart" class="nav-icon" title="Cart">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-                <a href="/account" class="nav-icon" title="Account">
-                    <i class="fas fa-user"></i>
-                </a>
-            </div>
+    <!-- Navigation -->
+    <nav class="navbar-luxury">
+        <div class="navbar-brand"><a href="/" style="text-decoration:none;"><h1>LUXE TIME</h1></a></div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
         </div>
+        <div class="nav-icons">
+            <a onclick="document.getElementById('searchOverlay').classList.add('active'); document.getElementById('mainSearch').focus();"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+            <a href="/cart" style="position:relative;">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/profile" title="Profile">
+                    <% if (user.image && user.image.length > 0) { %>
+                        <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
+                    <% } else { %>
+                        <i class="fa-regular fa-user"></i>
+                    <% } %>
+                </a>
+                <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <% } else { %>
+                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+            <% } %>
+        </div>
+        <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"><i class="fa-solid fa-bars"></i></button>
     </nav>
 
-    <div class="container wishlist-container">
-        <div class="wishlist-header">
-            <h1>My Wishlist</h1>
-            <p>Items you've saved for later</p>
+    <!-- Mobile Offcanvas Menu -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" style="background-color: var(--dark); color: var(--light-bg);">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title serif">LUXE TIME</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="filter: invert(1) grayscale(100%) brightness(200%);"></button>
         </div>
-
-        <% if (!wishlist || wishlist.items.length===0) { %>
-            <div class="empty-wishlist">
-                <i class="fas fa-heart-broken"></i>
-                <h3>Your wishlist is empty</h3>
-                <p>Add items to your wishlist to keep track of products you're interested in.</p>
-                <a href="/shope" class="btn btn-primary mt-3">Continue Shopping</a>
+        <div class="offcanvas-body d-flex flex-column text-center mt-5">
+            <a href="/" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Home</a>
+            <a href="/shope" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Shop</a>
+            <a href="/shope" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Collections</a>
+            <a href="/blog" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Blog</a>
+            <a href="/contact" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Contact</a>
+            <a href="/cart" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Cart</a>
+            <a href="/wishlist" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Wishlist</a>
+            <hr class="border-secondary my-4">
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <a onclick="document.getElementById('searchOverlay').classList.add('active');" style="color: var(--light-bg); font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="/wishlist" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-regular fa-user"></i></a>
+                <% if (typeof user !== 'undefined' && user) { %> <a href="/logout" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-solid fa-right-from-bracket"></i></a> <% } %>
             </div>
-            <% } else { %>
-                <div class="row">
-                    <% wishlist.items.forEach(item=> { %>
-                        <div class="col-md-6 col-lg-4 mb-4">
-                            <div class="card h-100">
-                                <% if (item.product.imagePaths && item.product.imagePaths.length> 0) { %>
-                                    <img src="<%= item.product.imagePaths[0] %>" class="card-img-top"
-                                        alt="<%= item.product.name %>">
-                                    <% } else { %>
-                                        <div class="text-center p-5 bg-light">No Image Available</div>
-                                        <% } %>
-                                            <div class="card-body">
-                                                <h5 class="card-title">
-                                                    <%= item.product.name %>
-                                                </h5>
-                                                <p class="card-text">
-                                                    <strong>Brand:</strong>
-                                                    <%= item.product.brand %><br>
-                                                        <strong>Price:</strong> $<%= item.product.price.toFixed(2) %>
-                                                            <br>
-                                                            <strong>Color:</strong>
-                                                            <%= item.color %>
-                                                                <span class="color-circle"
-                                                                    style="background-color: <%= item.color %>"></span>
-                                                </p>
-                                                <div class="d-flex justify-content-between mt-3">
-                                                    <button
-                                                        onclick="addToCart('<%= item.product._id %>', '<%= item.color %>')"
-                                                        class="btn btn-primary">
-                                                        <i class="fas fa-shopping-cart"></i> Add to Cart
-                                                    </button>
-                                                    <button onclick="removeFromWishlist('<%= item._id %>')"
-                                                        class="btn btn-outline-danger">
-                                                        <i class="fas fa-trash"></i>
-                                                    </button>
-                                                </div>
-                                            </div>
-                            </div>
-                        </div>
-                        <% }); %>
-                </div>
-                <div class="text-center mt-4">
-                    <a href="/shope" class="btn btn-outline-primary">Continue Shopping</a>
-                </div>
-                <% } %>
+        </div>
     </div>
 
-    <div class="pagination">
-        <% if (currentPage> 1) { %>
-            <a href="/wishlist?page=<%= currentPage - 1 %>" class="btn btn-outline-primary">
-                <i class="fas fa-chevron-left"></i> Previous
-            </a>
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="searchOverlay">
+        <i class="fa-solid fa-xmark close-search" onclick="document.getElementById('searchOverlay').classList.remove('active');"></i>
+        <input type="text" id="mainSearch" class="search-box-large" placeholder="Type to search...">
+    </div>
+
+    <div class="container">
+        <div class="page-header">
+            <h1 class="serif">Your Wishlist</h1>
+            <% if (wishlist && wishlist.items && wishlist.items.length > 0) { %>
+                <span class="item-count">(<%= wishlist.items.length %> Items)</span>
             <% } %>
+        </div>
+
+        <% if (!wishlist || !wishlist.items || wishlist.items.length === 0) { %>
+            <div class="empty-state glass-panel">
+                <i class="fas fa-heart"></i>
+                <h2 class="serif">Your wishlist is empty</h2>
+                <p>Curate your personal collection of timeless masterpieces.</p>
+                <a href="/shope" class="gold-btn">Discover Our Collection</a>
+            </div>
+        <% } else { %>
+            <div class="wishlist-grid">
+                <% wishlist.items.forEach(item => { %>
+                    <div class="wishlist-card glass-panel">
+                        <i class="fas fa-heart heart-icon"></i>
+                        
+                        <% if (item.product.imagePaths && item.product.imagePaths.length > 0) { %>
+                            <img src="<%= item.product.imagePaths[0] %>" alt="<%= item.product.name %>" class="product-img" onerror="this.src='https://via.placeholder.com/300?text=Watch'">
+                        <% } else { %>
+                            <img src="https://via.placeholder.com/300?text=No+Image" alt="<%= item.product.name %>" class="product-img">
+                        <% } %>
+
+                        <div class="product-brand"><%= item.product.brand || 'Luxe Brand' %></div>
+                        <div class="product-name serif"><%= item.product.name %></div>
+                        <div class="product-price serif">$<%= item.product.price.toFixed(2) %></div>
+
+                        <button onclick="addToCart('<%= item.product._id %>', '<%= item.color %>')" class="btn-outline-gold">
+                            Add to Cart
+                        </button>
+                        
+                        <button onclick="removeFromWishlist('<%= item._id %>')" class="btn-remove-link">
+                            Remove
+                        </button>
+                    </div>
+                <% }); %>
+            </div>
+
+            <!-- Pagination (if applicable) -->
+            <% if (typeof totalPages !== 'undefined' && totalPages > 1) { %>
+            <div class="pagination">
+                <% if (currentPage > 1) { %>
+                    <a href="/wishlist?page=<%= currentPage - 1 %>">
+                        <i class="fas fa-chevron-left"></i> Previous
+                    </a>
+                <% } %>
 
                 <span>Page <%= currentPage %> of <%= totalPages %></span>
 
                 <% if (currentPage < totalPages) { %>
-                    <a href="/wishlist?page=<%= currentPage + 1 %>" class="btn btn-outline-primary">
+                    <a href="/wishlist?page=<%= currentPage + 1 %>">
                         Next <i class="fas fa-chevron-right"></i>
                     </a>
-                    <% } %>
+                <% } %>
+            </div>
+            <% } %>
+        <% } %>
     </div>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         async function removeFromWishlist(itemId) {
             try {
                 const response = await fetch(`/wishlist/${itemId}`, {
                     method: 'DELETE',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    
-                    window.location.reload();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Removed!',
+                        text: 'Item removed from your wishlist.',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        background: 'rgba(255, 255, 255, 0.95)',
+                    }).then(() => {
+                        window.location.reload();
+                    });
                 } else {
-                    alert(data.message || 'Failed to remove item from wishlist');
+                    Swal.fire({ icon: 'error', title: 'Oops...', text: data.message || 'Failed to remove item' });
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Something went wrong!');
+                Swal.fire({ icon: 'error', title: 'Error', text: 'Something went wrong!' });
             }
         }
 
@@ -424,30 +431,31 @@
             try {
                 const response = await fetch('/cart', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        productId,
-                        color,
-                        quantity: 1
-                    })
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ productId, color, quantity: 1 })
                 });
 
                 const data = await response.json();
 
                 if (data.success) {
-                    alert('Item added to cart!');
-                   
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Added to Cart',
+                        text: 'The item has been added to your cart.',
+                        showConfirmButton: false,
+                        timer: 1500,
+                        background: 'rgba(255, 255, 255, 0.95)',
+                    });
                 } else {
-                    alert(data.message || 'Failed to add to cart');
+                    Swal.fire({ icon: 'error', title: 'Oops...', text: data.message || 'Failed to add to cart' });
                 }
             } catch (error) {
-                console.error('Error:', error);
-                alert('Something went wrong!');
+                Swal.fire({ icon: 'error', title: 'Error', text: 'Something went wrong!' });
             }
         }
-    </script>
-</body>
 
+        // Mobile offcanvas is handled by Bootstrap JS
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
