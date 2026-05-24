@@ -15,61 +15,75 @@
 
 <body>
     
-    <nav class="navbar navbar-expand-lg fixed-top bg-white">
-        <div class="container">
-            
-            <a class="navbar-brand" href="/">
-                LUXE TIME 
-                <span class="brand-dot"></span>
+    <!-- 1. Top Bar -->
+    <div class="top-bar">
+        Free Worldwide Shipping | Authenticity Guaranteed
+    </div>
+
+    <!-- 2. Navigation -->
+    <nav class="navbar-luxury">
+        <div class="navbar-brand">
+            <a href="/"><h1>LUXE TIME</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <div class="nav-icons">
+            <a href="/shope" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="/wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
+            <a href="/cart" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
+            <a href="javascript:void(0)" title="Share Referral" onclick="shareReferral()">
+                <i class="fa-brands fa-whatsapp" style="color: #25D366;"></i>
             </a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/profile" title="Profile">
+                    <% if (user.image && user.image.length > 0) { %>
+                        <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
+                    <% } else { %>
+                        <i class="fa-regular fa-user"></i>
+                    <% } %>
+                </a>
+                <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <% } else { %>
+                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+            <% } %>
+        </div>
+        
+        <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
 
-            
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-                <span class="toggler-icon"></span>
-            </button>
-
-            
-            <div class="collapse navbar-collapse" id="navbarContent">
-                <ul class="navbar-nav mx-auto text-uppercase">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/shope">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/men">Men</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/women">Women</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/limited-edition">Limited Edition</a>
-                    </li>
-                </ul>
-            </div>
-
-           
-            <div class="nav-icons">
-                <a href="/search" class="nav-icon" title="Search">
-                    <i class="fas fa-search"></i>
-                </a>
-                <a href="/wishlist" class="nav-icon" title="Wishlist">
-                    <i class="fas fa-heart"></i>
-                </a>
-                <a href="/cart" class="nav-icon" title="Cart">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-                <a href="/orders" class="nav-icon" title="Account">
-                    <i class="fas fa-user"></i>
-                </a>
-                <a href="javascript:void(0)" class="nav-icon" title="Share Referral" onclick="shareReferral()">
-                    <i class="fab fa-whatsapp" style="color: #25D366;"></i>
-                    <span class="icon-badge">Share</span>
-                </a>
+    <!-- Mobile Menu Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title serif">LUXE TIME</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column text-center mt-5">
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+            <a href="/cart">Cart</a>
+            <a href="/wishlist">Wishlist</a>
+            <hr class="border-secondary my-4">
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                <% } %>
             </div>
         </div>
-    </nav>
+    </div>
 
     <div class="account-container">
         
@@ -149,13 +163,13 @@
                     </div>
 
                   
-                    <div class="form-group">
+                    <div class="form-group referral-section">
                         <label>
                             <i class="fas fa-gift"></i> Your Referral Code
                         </label>
                         <div class="referral-code-container">
                             <input type="text" id="referralCode" value="<%= user.referralCode || 'LUXE' + user._id?.toString().substring(0, 6) %>" readonly>
-                            <button type="button" class="copy-btn" onclick="copyReferralCode()">
+                            <button type="button" class="copy-btn" onclick="copyReferralCode()" title="Copy Code">
                                 <i class="fas fa-copy"></i>
                             </button>
                         </div>
