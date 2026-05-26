@@ -160,12 +160,10 @@
       }
     }
 
-    /* 3. Hero Section */
+    /* 3. Hero Section (Optimized for 3D Video) */
     .hero {
+      position: relative;
       height: 85vh;
-      background-image: linear-gradient(rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0.7)), url('https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -173,6 +171,36 @@
       text-align: center;
       color: var(--ivory);
       padding: 0 20px;
+      overflow: hidden;
+      background-color: var(--charcoal);
+    }
+
+    .hero-video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      width: auto;
+      height: auto;
+      transform: translateX(-50%) translateY(-50%);
+      z-index: 0;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(26, 26, 26, 0.4), rgba(26, 26, 26, 0.7));
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
     }
 
     .hero h2 {
@@ -722,8 +750,19 @@
 
   <!-- 3. Hero Section -->
   <section class="hero">
-    <h2 class="serif">Timeless Elegance, Redefined.</h2>
-    <a href="/shope" class="btn-gold">Explore the Collection</a>
+    <!-- Optimal Video Setup: Plays automatically, silently, loops endlessly, and scales properly -->
+    <video class="hero-video" autoplay muted loop playsinline poster="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop">
+      <!-- User's uploaded 3D video -->
+      <source src="/videos/watch demo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    
+    <div class="hero-overlay"></div>
+    
+    <div class="hero-content">
+      <h2 class="serif">Timeless Elegance, Redefined.</h2>
+      <a href="/shope" class="btn-gold">Explore the Collection</a>
+    </div>
   </section>
 
   <!-- 4. Brand Promise Strip -->
