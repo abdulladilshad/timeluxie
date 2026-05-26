@@ -546,50 +546,109 @@
       color: var(--warm-gray);
     }
 
-    /* Search Input Overlay */
+    /* Search Input Overlay - Glassmorphism Luxury */
     .search-overlay {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(26, 26, 26, 0.95);
+      background: rgba(10, 10, 10, 0.4);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       z-index: 1100;
-      display: none;
+      display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     }
 
     .search-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .search-container {
       display: flex;
+      align-items: center;
+      width: 90%;
+      max-width: 800px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 20px 30px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+      transform: translateY(-30px);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    
+    .search-overlay.active .search-container {
+      transform: translateY(0);
+    }
+
+    .search-icon-large {
+      color: var(--gold);
+      font-size: 1.5rem;
+      margin-right: 20px;
     }
 
     .search-box-large {
-      width: 80%;
-      max-width: 600px;
+      flex: 1;
       border: none;
-      border-bottom: 2px solid var(--gold);
       background: transparent;
-      color: var(--ivory);
-      font-size: 2rem;
-      padding: 10px 0;
+      color: #ffffff;
+      font-size: 1.8rem;
       outline: none;
-      text-align: center;
-      font-family: var(--font-serif);
+      font-family: var(--font-sans);
+      font-weight: 300;
+      letter-spacing: 1px;
     }
 
     .search-box-large::placeholder {
-      color: rgba(245, 241, 235, 0.5);
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .ai-search-icon {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.5rem;
+      margin-left: 15px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .ai-search-icon:hover {
+      color: var(--gold);
     }
 
     .close-search {
-      position: absolute;
-      top: 30px;
-      right: 40px;
-      color: var(--ivory);
-      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 1.8rem;
       cursor: pointer;
+      margin-left: 20px;
+      transition: color 0.3s, transform 0.3s;
+    }
+
+    .close-search:hover {
+      color: #ffffff;
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 768px) {
+      .search-container {
+        width: 95%;
+        padding: 15px 20px;
+        border-radius: 16px;
+      }
+      .search-box-large {
+        font-size: 1.2rem;
+      }
+      .search-icon-large, .ai-search-icon, .close-search {
+        font-size: 1.2rem;
+        margin-right: 10px;
+        margin-left: 10px;
+      }
     }
 
     /* Responsive Grid */
@@ -700,8 +759,7 @@
       <a href="/cart">Cart</a><a href="/wishlist">Wishlist</a>
       <hr class="border-secondary my-4">
       <div class="d-flex justify-content-center gap-4 mt-3">
-        <a onclick="document.getElementById('searchOverlay').classList.add('active');"><i
-            class="fa-solid fa-magnifying-glass"></i></a>
+        <a onclick="const mobileMenu = document.getElementById('mobileMenu'); const bsOffcanvas = bootstrap.Offcanvas.getInstance(mobileMenu); if(bsOffcanvas) bsOffcanvas.hide(); document.getElementById('searchOverlay').classList.add('active'); setTimeout(() => document.getElementById('mainSearch').focus(), 400);"><i class="fa-solid fa-magnifying-glass"></i></a>
         <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
         <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
         <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i
@@ -713,11 +771,15 @@
     </div>
   </div>
 
-  <!-- Search Overlay -->
+  <!-- Search Overlay - Glassmorphism -->
   <div class="search-overlay" id="searchOverlay">
-    <i class="fa-solid fa-xmark close-search"
-      onclick="document.getElementById('searchOverlay').classList.remove('active');"></i>
-    <input type="text" id="mainSearch" class="search-box-large" placeholder="Type to search...">
+    <div class="search-container">
+      <i class="fa-solid fa-magnifying-glass search-icon-large"></i>
+      <input type="text" id="mainSearch" class="search-box-large" placeholder="Search references, models, or calibers...">
+      <i class="fa-solid fa-camera ai-search-icon" title="AI Image Search"></i>
+      <i class="fa-solid fa-xmark close-search"
+        onclick="document.getElementById('searchOverlay').classList.remove('active');"></i>
+    </div>
   </div>
 
   <!-- Header -->
@@ -954,14 +1016,23 @@
 
       // Search Event
       let searchTimeout;
-      if (mainSearch) mainSearch.addEventListener('input', function () {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          currentFilters.search = this.value.trim();
-          currentFilters.page = 1;
-          applyFilters();
-        }, 500);
-      });
+      if (mainSearch) {
+        mainSearch.addEventListener('input', function () {
+          clearTimeout(searchTimeout);
+          searchTimeout = setTimeout(() => {
+            currentFilters.search = this.value.trim();
+            currentFilters.page = 1;
+            applyFilters();
+          }, 500);
+        });
+
+        mainSearch.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            document.getElementById('searchOverlay').classList.remove('active');
+          }
+        });
+      }
 
       function syncMobile() {
         if (mobileCategory) mobileCategory.value = currentFilters.category;
