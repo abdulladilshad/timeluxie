@@ -9,7 +9,7 @@ const getAddresses = async (req, res) => {
         if (!userId) return res.status(401).json({ success: false, message: 'User not logged in' });
 
         const addresses = await addressModel.find({ userId });
-        res.render('user/address', { addresses });
+        res.render('user/address', { addresses, user: req.session.user });
     } catch (error) {
         console.error('Error fetching addresses:', error);
         res.status(500).json({ success: false, error: error.message });

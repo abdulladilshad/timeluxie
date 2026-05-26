@@ -60,7 +60,8 @@ const orderHistory = async (req, res) => {
                 currentPage: page,
                 totalPages: 0,
                 hasNextPage: false,
-                hasPrevPage: false
+                hasPrevPage: false,
+                user: req.session.user
             });
         }        
 
@@ -71,7 +72,8 @@ const orderHistory = async (req, res) => {
             currentPage: page,
             totalPages,
             hasNextPage: page < totalPages,
-            hasPrevPage: page > 1
+            hasPrevPage: page > 1,
+            user: req.session.user
         });
 
     } catch (error) {
@@ -82,7 +84,8 @@ const orderHistory = async (req, res) => {
             currentPage: 1,
             totalPages: 0,
             hasNextPage: false,
-            hasPrevPage: false
+            hasPrevPage: false,
+            user: req.session.user
         });
     }
 };
@@ -278,7 +281,8 @@ const orderSuccess = async (req, res) => {
         res.render("user/order", {
             orderId: order._id,
             totalAmount: order.totalAmount,
-            products: order.products
+            products: order.products,
+            user: req.session.user
         });
     } catch (error) {
         console.error(error);

@@ -21,7 +21,7 @@ const getWallet = async (req, res) => {
         const wallet = await Wallet.findOne({user: user._id});
         
         if (!wallet) {
-            return res.render('user/wallet', { hasWallet: false });
+            return res.render('user/wallet', { hasWallet: false, user: req.session.user });
         }
 
         const transactions = await Transaction.find({user: user._id})
@@ -31,7 +31,8 @@ const getWallet = async (req, res) => {
         res.render('user/wallet', { 
             hasWallet: true,
             balance: wallet.balance, 
-            transactions: transactions 
+            transactions: transactions,
+            user: req.session.user
         });
     } catch (error) {
         console.error('Error fetching wallet:', error);

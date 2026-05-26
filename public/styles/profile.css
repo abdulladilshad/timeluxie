@@ -444,11 +444,13 @@ body {
 }
 .offcanvas a {
     color: #F5F1EB;
+    text-decoration: none;
+}
+.offcanvas-body > a {
     font-family: 'Playfair Display', serif;
     font-size: 1.5rem;
     margin-bottom: 20px;
     display: block;
-    text-decoration: none;
 }
 .offcanvas a:hover {
     color: var(--gold-primary);

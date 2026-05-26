@@ -7,61 +7,235 @@
     <title>My Addresses</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/address.css">
     <link rel="stylesheet" href="/styles/account-dashboard.css">
+    <style>
+        /* Override account-dashboard.css body padding */
+        body {
+            padding-top: 0 !important;
+        }
+
+        /* Navbar Styles from Luxury Theme */
+        .top-bar {
+            background-color: #1a1a1a;
+            color: #fdfbf7;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .navbar-luxury {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .navbar-brand h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            cursor: pointer;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: #d4af37;
+        }
+
+        .profile-img-nav {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #1a1a1a;
+        }
+
+        @media (max-width: 991px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-icons {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        /* Mobile Offcanvas Overrides */
+        .offcanvas {
+            background-color: #1A1A1A;
+            color: #F5F1EB;
+        }
+        .offcanvas .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+        .offcanvas a {
+            color: #F5F1EB;
+            text-decoration: none;
+        }
+        .offcanvas-body > a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .offcanvas a:hover {
+            color: #C5A66E;
+        }
+        
+        .account-container {
+            margin-top: 0 !important;
+        }
+    </style>
 </head>
 
 <body>
-   
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="/">
-                LUXE TIME
-                <span class="brand-dot"></span>
-            </a>
+    <!-- 1. Top Bar -->
+    <div class="top-bar">
+        Free Worldwide Shipping | Authenticity Guaranteed
+    </div>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <!-- 2. Navigation -->
+    <nav class="navbar-luxury">
+        <div class="navbar-brand">
+            <a href="/"><h1>LUXE TIME</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <div class="nav-icons">
+            <a href="/shope" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="/wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
+            <a href="/cart" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/profile" title="Profile">
+                    <% if (user.image && user.image.length > 0) { %>
+                        <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
+                    <% } else { %>
+                        <i class="fa-regular fa-user"></i>
+                    <% } %>
+                </a>
+                <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <% } else { %>
+                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+            <% } %>
+        </div>
+        
+        <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
 
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/shope">Shop</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/men">Men</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/women">Women</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/limited-edition">Limited Edition</a>
-                    </li>
-                </ul>
-
-                <div class="nav-icons">
-                    <a href="/search" class="nav-icon">
-                        <i class="fas fa-search"></i>
-                    </a>
-                    <a href="/wishlist" class="nav-icon">
-                        <i class="fas fa-heart"></i>
-                    </a>
-                    <a href="/cart" class="nav-icon">
-                        <i class="fas fa-shopping-cart"></i>
-                    </a>
-                    <a href="/orders" class="nav-icon">
-                        <i class="fas fa-user"></i>
-                    </a>
-                </div>
+    <!-- Mobile Menu Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title serif">LUXE TIME</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column text-center mt-5">
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+            <a href="/cart">Cart</a>
+            <a href="/wishlist">Wishlist</a>
+            <hr class="border-secondary my-4">
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                <% } %>
             </div>
         </div>
-    </nav>
+    </div>
 
     <div class="account-container">
         

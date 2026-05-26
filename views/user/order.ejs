@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Success</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/styles/account-dashboard.css">
     <style>
         * {
             margin: 0;
@@ -17,73 +20,211 @@
         body {
             min-height: 100vh;
             display: flex;
+            flex-direction: column;
+            padding-top: 0 !important;
+        }
+        
+        .main-content {
+            flex-grow: 1;
+            display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+        }
+
+        /* Navbar Styles from Luxury Theme */
+        .top-bar {
+            background-color: #1a1a1a;
+            color: #fdfbf7;
+            text-align: center;
+            padding: 8px 0;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: 300;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .navbar-luxury {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(26, 26, 26, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .navbar-brand h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #1a1a1a;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s;
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -4px;
+            left: 0;
+            background-color: #d4af37;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d4af37;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-icons a {
+            font-size: 1.1rem;
+            transition: color 0.3s;
+            cursor: pointer;
+            color: #1a1a1a;
+            text-decoration: none;
+        }
+
+        .nav-icons a:hover {
+            color: #d4af37;
+        }
+
+        .profile-img-nav {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+            color: #1a1a1a;
+        }
+
+        @media (max-width: 991px) {
+            .nav-links {
+                display: none;
+            }
+
+            .nav-icons {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        /* Mobile Offcanvas Overrides */
+        .offcanvas {
+            background-color: #1A1A1A;
+            color: #F5F1EB;
+        }
+        .offcanvas .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+        .offcanvas a {
+            color: #F5F1EB;
+            text-decoration: none;
+        }
+        .offcanvas-body > a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .offcanvas a:hover {
+            color: #C5A66E;
         }
 
         .success-container {
-            background: white;
-            padding: 2.5rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            padding: 3rem;
             text-align: center;
-            max-width: 500px;
+            max-width: 550px;
             width: 90%;
         }
 
         .success-icon {
             width: 100px;
             height: 100px;
-            background: #4CAF50;
+            background: rgba(197, 160, 89, 0.1);
+            border: 2px solid #C5A059;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 2rem;
-            animation: scaleUp 0.5s ease-in-out;
+            animation: scaleUp 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .success-icon i {
-            color: white;
-            font-size: 50px;
+            color: #C5A059;
+            font-size: 45px;
         }
 
         h2 {
-            color: #2c3e50;
+            color: #1a1a1a;
             margin-bottom: 1rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
         }
 
         .order-id {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 10px;
-            color: #6c757d;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 1.2rem;
+            border-radius: 8px;
+            border: 1px dashed #C5A059;
+            color: #666;
             font-size: 1.1rem;
             margin: 1.5rem 0;
         }
 
         .order-id span {
-            color: #2c3e50;
-            font-weight: 600;
-        }
-
-        .home-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-top: 1rem;
-        }
-
-        .home-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(76, 175, 80, 0.3);
+            color: #C5A059;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
 
         @keyframes scaleUp {
@@ -125,19 +266,90 @@
     </style>
 </head>
 <body>
-    <div class="success-container">
-        <div class="success-icon">
-            <i class="fas fa-check"></i>
-        </div>
-        <h2>Order Placed Successfully!</h2>
-        <p class="thank-you">Thank you for your purchase</p>
-        <div class="order-id">
-            Order ID: <span><%= orderId %></span>
-        </div>
-        <p class="thank-you">We'll send you an email with your order details shortly.</p>
-        <a href="/orders" class="home-button">
-            <i class="fas fa-shopping-bag"></i> view oerders
-        </a>
+    <!-- 1. Top Bar -->
+    <div class="top-bar">
+        Free Worldwide Shipping | Authenticity Guaranteed
     </div>
+
+    <!-- 2. Navigation -->
+    <nav class="navbar-luxury">
+        <div class="navbar-brand">
+            <a href="/"><h1>LUXE TIME</h1></a>
+        </div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+        </div>
+        <div class="nav-icons">
+            <a href="/shope" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <a href="/wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
+            <a href="/cart" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
+            <% if (typeof user !== 'undefined' && user) { %>
+                <a href="/profile" title="Profile">
+                    <% if (user.image && user.image.length > 0) { %>
+                        <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
+                    <% } else { %>
+                        <i class="fa-regular fa-user"></i>
+                    <% } %>
+                </a>
+                <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <% } else { %>
+                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+            <% } %>
+        </div>
+        
+        <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Offcanvas -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
+        <div class="offcanvas-header border-bottom border-secondary">
+            <h5 class="offcanvas-title serif">LUXE TIME</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body d-flex flex-column text-center mt-5">
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+            <a href="/cart">Cart</a>
+            <a href="/wishlist">Wishlist</a>
+            <hr class="border-secondary my-4">
+            <div class="d-flex justify-content-center gap-4 mt-3">
+                <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
+                <% if (typeof user !== 'undefined' && user) { %>
+                    <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="success-container glass-card">
+            <div class="success-icon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2>Order Placed Successfully!</h2>
+            <p class="thank-you">Thank you for your purchase</p>
+            <div class="order-id">
+                Order ID: <span><%= orderId %></span>
+            </div>
+            <p class="thank-you" style="margin-bottom: 2rem;">We'll send you an email with your order details shortly.</p>
+            <a href="/orders" class="gold-btn">
+                <i class="fas fa-shopping-bag"></i> View Orders
+            </a>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
