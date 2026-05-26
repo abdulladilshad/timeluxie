@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Success</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/styles/account-dashboard.css">
@@ -23,7 +27,7 @@
             flex-direction: column;
             padding-top: 0 !important;
         }
-        
+
         .main-content {
             flex-grow: 1;
             display: flex;
@@ -155,25 +159,29 @@
                 display: block;
             }
         }
-        
+
         /* Mobile Offcanvas Overrides */
         .offcanvas {
             background-color: #1A1A1A;
             color: #F5F1EB;
         }
+
         .offcanvas .btn-close {
             filter: invert(1) grayscale(100%) brightness(200%);
         }
+
         .offcanvas a {
             color: #F5F1EB;
             text-decoration: none;
         }
-        .offcanvas-body > a {
+
+        .offcanvas-body>a {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             margin-bottom: 20px;
             display: block;
         }
+
         .offcanvas a:hover {
             color: #C5A66E;
         }
@@ -231,9 +239,11 @@
             0% {
                 transform: scale(0);
             }
+
             70% {
                 transform: scale(1.1);
             }
+
             100% {
                 transform: scale(1);
             }
@@ -265,6 +275,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- 1. Top Bar -->
     <div class="top-bar">
@@ -274,7 +285,9 @@
     <!-- 2. Navigation -->
     <nav class="navbar-luxury">
         <div class="navbar-brand">
-            <a href="/"><h1>LUXE TIME</h1></a>
+            <a href="/">
+                <h1>LUXE TIME</h1>
+            </a>
         </div>
         <div class="nav-links">
             <a href="/">Home</a>
@@ -287,20 +300,20 @@
             <a href="/shope" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
             <a href="/wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
             <a href="/cart" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
-            <% if (typeof user !== 'undefined' && user) { %>
+            <% if (typeof user !=='undefined' && user) { %>
                 <a href="/profile" title="Profile">
-                    <% if (user.image && user.image.length > 0) { %>
+                    <% if (user.image && user.image.length> 0) { %>
                         <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
-                    <% } else { %>
-                        <i class="fa-regular fa-user"></i>
-                    <% } %>
+                        <% } else { %>
+                            <i class="fa-regular fa-user"></i>
+                            <% } %>
                 </a>
                 <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-            <% } else { %>
-                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
-            <% } %>
+                <% } else { %>
+                    <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+                    <% } %>
         </div>
-        
+
         <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -325,10 +338,11 @@
                 <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
                 <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
                 <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
-                <% if (typeof user !== 'undefined' && user) { %>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i
+                        class="fa-regular fa-user"></i></a>
+                <% if (typeof user !=='undefined' && user) { %>
                     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-                <% } %>
+                    <% } %>
             </div>
         </div>
     </div>
@@ -341,15 +355,19 @@
             <h2>Order Placed Successfully!</h2>
             <p class="thank-you">Thank you for your purchase</p>
             <div class="order-id">
-                Order ID: <span><%= orderId %></span>
+                Order ID: <span>
+                    <%= orderId %>
+                </span>
             </div>
-            <p class="thank-you" style="margin-bottom: 2rem;">We'll send you an email with your order details shortly.</p>
+            <p class="thank-you" style="margin-bottom: 2rem;">We'll send you an email with your order details shortly.
+            </p>
             <a href="/orders" class="gold-btn">
                 <i class="fas fa-shopping-bag"></i> View Orders
             </a>
         </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

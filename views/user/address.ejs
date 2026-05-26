@@ -7,7 +7,9 @@
     <title>My Addresses</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles/address.css">
     <link rel="stylesheet" href="/styles/account-dashboard.css">
@@ -140,29 +142,33 @@
                 display: block;
             }
         }
-        
+
         /* Mobile Offcanvas Overrides */
         .offcanvas {
             background-color: #1A1A1A;
             color: #F5F1EB;
         }
+
         .offcanvas .btn-close {
             filter: invert(1) grayscale(100%) brightness(200%);
         }
+
         .offcanvas a {
             color: #F5F1EB;
             text-decoration: none;
         }
-        .offcanvas-body > a {
+
+        .offcanvas-body>a {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             margin-bottom: 20px;
             display: block;
         }
+
         .offcanvas a:hover {
             color: #C5A66E;
         }
-        
+
         .account-container {
             margin-top: 0 !important;
         }
@@ -178,7 +184,9 @@
     <!-- 2. Navigation -->
     <nav class="navbar-luxury">
         <div class="navbar-brand">
-            <a href="/"><h1>LUXE TIME</h1></a>
+            <a href="/">
+                <h1>LUXE TIME</h1>
+            </a>
         </div>
         <div class="nav-links">
             <a href="/">Home</a>
@@ -191,20 +199,20 @@
             <a href="/shope" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
             <a href="/wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
             <a href="/cart" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
-            <% if (typeof user !== 'undefined' && user) { %>
+            <% if (typeof user !=='undefined' && user) { %>
                 <a href="/profile" title="Profile">
-                    <% if (user.image && user.image.length > 0) { %>
+                    <% if (user.image && user.image.length> 0) { %>
                         <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
-                    <% } else { %>
-                        <i class="fa-regular fa-user"></i>
-                    <% } %>
+                        <% } else { %>
+                            <i class="fa-regular fa-user"></i>
+                            <% } %>
                 </a>
                 <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-            <% } else { %>
-                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
-            <% } %>
+                <% } else { %>
+                    <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+                    <% } %>
         </div>
-        
+
         <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -229,16 +237,17 @@
                 <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
                 <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
                 <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
-                <% if (typeof user !== 'undefined' && user) { %>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i
+                        class="fa-regular fa-user"></i></a>
+                <% if (typeof user !=='undefined' && user) { %>
                     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-                <% } %>
+                    <% } %>
             </div>
         </div>
     </div>
 
     <div class="account-container">
-        
+
         <div class="account-sidebar">
             <div class="sidebar-greeting">
                 <span class="serif">Welcome</span>
@@ -275,7 +284,7 @@
             </nav>
         </div>
 
-        
+
         <div class="account-content glass-card">
             <h1>My Addresses</h1>
             <button class="gold-btn-outline" onclick="openAddModal()">
@@ -315,7 +324,7 @@
         </div>
     </div>
 
-    
+
     <div id="addressModal" class="modal">
         <div class="modal-content">
             <h2 id="modalTitle">Add New Address</h2>
@@ -408,12 +417,12 @@
                 if (!response.ok) throw new Error('Failed to fetch address');
 
                 const addressData = await response.json();
-                
+
 
                 if (addressData.success) {
                     const { fullName, phone, street, city, state, zipCode, isDefault } = addressData.address;
 
-                    
+
                     document.getElementById('fullName').value = fullName;
                     document.getElementById('phone').value = phone;
                     document.getElementById('street').value = street;
@@ -512,11 +521,11 @@
             input.addEventListener('blur', () => validateField(field));
         });
 
-        
+
         form.onsubmit = async (e) => {
             e.preventDefault();
 
-            
+
             const isValid = fields.every(field => validateField(field));
             if (!isValid) return;
 
@@ -548,13 +557,13 @@
                     throw new Error(data.message || 'Error saving address');
                 }
             } catch (error) {
-                
+
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'form-error-message show';
-                errorDiv.textContent = error.message;kl;
+                errorDiv.textContent = error.message; kl;
                 form.insertBefore(errorDiv, form.firstChild);
 
-                
+
                 setTimeout(() => errorDiv.remove(), 5000);
             }
         };

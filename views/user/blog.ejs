@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>The Journal | LUXE TIME</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
 
   <style>
     :root {
@@ -30,7 +33,13 @@
       padding: 0;
     }
 
-    h1, h2, h3, h4, h5, h6, .serif {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    .serif {
       font-family: var(--font-serif);
     }
 
@@ -57,14 +66,15 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(26,26,26,0.1);
+      border-bottom: 1px solid rgba(26, 26, 26, 0.1);
       position: sticky;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(10px); /* Add a slight "glasing" effect */
+      backdrop-filter: blur(10px);
+      /* Add a slight "glasing" effect */
       background-color: rgba(245, 241, 235, 0.9);
     }
-    
+
     .navbar-brand h1 {
       margin: 0;
       font-size: clamp(1.4rem, 2vw, 1.8rem);
@@ -98,11 +108,13 @@
       transition: width 0.3s;
     }
 
-    .nav-links a:hover, .nav-links a.active {
+    .nav-links a:hover,
+    .nav-links a.active {
       color: var(--gold);
     }
 
-    .nav-links a:hover::after, .nav-links a.active::after {
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
       width: 100%;
     }
 
@@ -120,7 +132,7 @@
     .nav-icons a:hover {
       color: var(--gold);
     }
-    
+
     .profile-img-nav {
       width: 25px;
       height: 25px;
@@ -138,28 +150,39 @@
     }
 
     @media (max-width: 991px) {
-      .nav-links { display: none; }
-      .nav-icons { display: none; }
-      .mobile-menu-btn { display: block; }
+      .nav-links {
+        display: none;
+      }
+
+      .nav-icons {
+        display: none;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
     }
 
     /* Mobile Offcanvas Overrides */
     .offcanvas {
-        background-color: var(--charcoal);
-        color: var(--ivory);
+      background-color: var(--charcoal);
+      color: var(--ivory);
     }
+
     .offcanvas .btn-close {
-        filter: invert(1) grayscale(100%) brightness(200%);
+      filter: invert(1) grayscale(100%) brightness(200%);
     }
+
     .offcanvas a {
-        color: var(--ivory);
-        font-family: var(--font-serif);
-        font-size: 1.5rem;
-        margin-bottom: 20px;
-        display: block;
+      color: var(--ivory);
+      font-family: var(--font-serif);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      display: block;
     }
+
     .offcanvas a:hover {
-        color: var(--gold);
+      color: var(--gold);
     }
 
     /* 2. Page Header */
@@ -188,7 +211,7 @@
       justify-content: center;
       gap: 30px;
       padding: 0 5% 40px;
-      border-bottom: 1px solid rgba(26,26,26,0.1);
+      border-bottom: 1px solid rgba(26, 26, 26, 0.1);
       margin-bottom: 60px;
     }
 
@@ -203,7 +226,8 @@
       white-space: nowrap;
     }
 
-    .category-pill:hover, .category-pill.active {
+    .category-pill:hover,
+    .category-pill.active {
       color: var(--charcoal);
       border-bottom: 2px solid var(--gold);
     }
@@ -213,11 +237,15 @@
         justify-content: flex-start;
         overflow-x: auto;
         padding-bottom: 20px;
-        scrollbar-width: none; /* Firefox */
+        scrollbar-width: none;
+        /* Firefox */
       }
+
       .category-filter::-webkit-scrollbar {
-        display: none; /* Chrome */
+        display: none;
+        /* Chrome */
       }
+
       .category-pill {
         padding-bottom: 10px;
       }
@@ -241,7 +269,10 @@
 
     .featured-image {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
       transition: transform 0.7s ease;
     }
@@ -252,8 +283,11 @@
 
     .featured-overlay {
       position: absolute;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(0, 0, 0, 0) 100%);
     }
 
     .featured-content {
@@ -315,20 +349,25 @@
         flex-direction: column;
         align-items: stretch;
       }
+
       .featured-image {
         position: relative;
         height: 300px;
       }
+
       .featured-overlay {
         display: none;
       }
+
       .featured-content {
         padding: 30px 0 0 0;
         color: var(--charcoal);
       }
+
       .article-meta {
         color: var(--warm-gray);
       }
+
       .read-more-link {
         color: var(--charcoal);
       }
@@ -403,11 +442,20 @@
     }
 
     @media (max-width: 991px) {
-      .journal-grid { grid-template-columns: repeat(2, 1fr); }
+      .journal-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
+
     @media (max-width: 768px) {
-      .journal-grid { grid-template-columns: 1fr; gap: 50px;}
-      .article-card:hover { transform: none; }
+      .journal-grid {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+
+      .article-card:hover {
+        transform: none;
+      }
     }
 
     /* 6. Load More Button */
@@ -434,7 +482,9 @@
     }
 
     @media (max-width: 768px) {
-      .btn-outline-gold { width: 100%; }
+      .btn-outline-gold {
+        width: 100%;
+      }
     }
 
     /* 7. Newsletter CTA */
@@ -462,7 +512,7 @@
       display: flex;
       max-width: 600px;
       margin: 0 auto;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .newsletter-inline-form input {
@@ -501,17 +551,20 @@
         border-bottom: none;
         gap: 15px;
       }
+
       .newsletter-inline-form input {
-        border-bottom: 1px solid rgba(255,255,255,0.3);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
         padding: 15px;
         text-align: center;
       }
+
       .newsletter-inline-form button {
         background: var(--gold);
         color: var(--ivory);
         padding: 15px;
         width: 100%;
       }
+
       .newsletter-inline-form button:hover {
         background: #A38656;
       }
@@ -522,7 +575,8 @@
       background-color: var(--charcoal);
       color: var(--ivory);
       padding: 80px 5% 40px 5%;
-      border-top: 1px solid rgba(255,255,255,0.05); /* Slight separation from newsletter */
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      /* Slight separation from newsletter */
     }
 
     .footer-grid {
@@ -541,7 +595,8 @@
       color: var(--gold);
     }
 
-    .footer-col p, .footer-col a {
+    .footer-col p,
+    .footer-col a {
       color: #999;
       font-size: 0.9rem;
       line-height: 1.8;
@@ -560,7 +615,7 @@
     .newsletter-form {
       display: flex;
       margin-top: 20px;
-      border-bottom: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .newsletter-form input {
@@ -606,11 +661,20 @@
     }
 
     @media (max-width: 991px) {
-      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
     }
+
     @media (max-width: 768px) {
-      .footer-grid { grid-template-columns: 1fr; gap: 40px; }
-      .footer-luxury { padding: 60px 5% 30px 5%; }
+      .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .footer-luxury {
+        padding: 60px 5% 30px 5%;
+      }
     }
   </style>
 </head>
@@ -624,7 +688,9 @@
   <!-- 2. Navigation -->
   <nav class="navbar-luxury">
     <div class="navbar-brand">
-      <a href="/"><h1>LUXE TIME</h1></a>
+      <a href="/">
+        <h1>LUXE TIME</h1>
+      </a>
     </div>
     <div class="nav-links">
       <a href="/">Home</a>
@@ -637,21 +703,21 @@
       <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
       <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
       <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-      
-      <% if (typeof user !== 'undefined' && user) { %>
+
+      <% if (typeof user !=='undefined' && user) { %>
         <a href="/profile" title="Profile">
-          <% if (user.image && user.image.length > 0) { %>
+          <% if (user.image && user.image.length> 0) { %>
             <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
-          <% } else { %>
-            <i class="fa-regular fa-user"></i>
-          <% } %>
+            <% } else { %>
+              <i class="fa-regular fa-user"></i>
+              <% } %>
         </a>
         <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-      <% } else { %>
-        <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
-      <% } %>
+        <% } else { %>
+          <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+          <% } %>
     </div>
-    
+
     <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
       <i class="fa-solid fa-bars"></i>
     </button>
@@ -674,10 +740,11 @@
         <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
         <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
         <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-        <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
-        <% if (typeof user !== 'undefined' && user) { %>
-            <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-        <% } %>
+        <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i
+            class="fa-regular fa-user"></i></a>
+        <% if (typeof user !=='undefined' && user) { %>
+          <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
+          <% } %>
       </div>
     </div>
   </div>
@@ -700,7 +767,8 @@
   <!-- Featured Article -->
   <section class="featured-article">
     <a href="#" class="featured-card">
-      <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1887&auto=format&fit=crop" alt="The Evolution of the Tourbillon" class="featured-image">
+      <img src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?q=80&w=1887&auto=format&fit=crop"
+        alt="The Evolution of the Tourbillon" class="featured-image">
       <div class="featured-overlay"></div>
       <div class="featured-content">
         <span class="category-tag">Craftsmanship</span>
@@ -719,66 +787,78 @@
     <!-- Article 1 -->
     <a href="#" class="article-card">
       <div class="article-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop" alt="Iconic Dive Watches" class="article-image">
+        <img src="https://images.unsplash.com/photo-1523170335258-f5ed11844a49?q=80&w=2080&auto=format&fit=crop"
+          alt="Iconic Dive Watches" class="article-image">
       </div>
       <span class="category-tag">Watch Guides</span>
       <h3 class="article-title">Top 5 Iconic Dive Watches Every Collector Should Know</h3>
-      <p class="article-excerpt">Discover the history and enduring appeal of the world's most recognizable underwater timepieces that defined an era.</p>
+      <p class="article-excerpt">Discover the history and enduring appeal of the world's most recognizable underwater
+        timepieces that defined an era.</p>
       <div class="article-date">October 10, 2024</div>
     </a>
 
     <!-- Article 2 -->
     <a href="#" class="article-card">
       <div class="article-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=2070&auto=format&fit=crop" alt="The Art of Enameling" class="article-image">
+        <img src="https://images.unsplash.com/photo-1612817159949-195b6eb9e31a?q=80&w=2070&auto=format&fit=crop"
+          alt="The Art of Enameling" class="article-image">
       </div>
       <span class="category-tag">Brand Stories</span>
       <h3 class="article-title">The Lost Art of Grand Feu Enameling in Modern Horology</h3>
-      <p class="article-excerpt">A deep dive into the painstaking process of creating vibrant, everlasting dials using techniques unchanged for centuries.</p>
+      <p class="article-excerpt">A deep dive into the painstaking process of creating vibrant, everlasting dials using
+        techniques unchanged for centuries.</p>
       <div class="article-date">October 05, 2024</div>
     </a>
 
     <!-- Article 3 -->
     <a href="#" class="article-card">
       <div class="article-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=1904&auto=format&fit=crop" alt="Geneva Watch Days 2024" class="article-image">
+        <img src="https://images.unsplash.com/photo-1622434641406-a158123450f9?q=80&w=1904&auto=format&fit=crop"
+          alt="Geneva Watch Days 2024" class="article-image">
       </div>
       <span class="category-tag">News</span>
       <h3 class="article-title">Highlights from Geneva Watch Days: What You Missed</h3>
-      <p class="article-excerpt">An exclusive look at the most exciting releases, unexpected trends, and groundbreaking innovations from this year's show.</p>
+      <p class="article-excerpt">An exclusive look at the most exciting releases, unexpected trends, and groundbreaking
+        innovations from this year's show.</p>
       <div class="article-date">September 28, 2024</div>
     </a>
 
     <!-- Article 4 -->
     <a href="#" class="article-card">
       <div class="article-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1999&auto=format&fit=crop" alt="Investing in Vintage" class="article-image">
+        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=1999&auto=format&fit=crop"
+          alt="Investing in Vintage" class="article-image">
       </div>
       <span class="category-tag">Watch Guides</span>
       <h3 class="article-title">A Beginner's Guide to Investing in Vintage Timepieces</h3>
-      <p class="article-excerpt">Navigating the complexities of the vintage market: what to look for, condition over rarity, and avoiding common pitfalls.</p>
+      <p class="article-excerpt">Navigating the complexities of the vintage market: what to look for, condition over
+        rarity, and avoiding common pitfalls.</p>
       <div class="article-date">September 20, 2024</div>
     </a>
 
     <!-- Article 5 -->
     <a href="#" class="article-card">
       <div class="article-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=2127&auto=format&fit=crop" alt="Mechanical Movements" class="article-image">
+        <img src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?q=80&w=2127&auto=format&fit=crop"
+          alt="Mechanical Movements" class="article-image">
       </div>
       <span class="category-tag">Craftsmanship</span>
       <h3 class="article-title">Understanding the Anatomy of a Mechanical Movement</h3>
-      <p class="article-excerpt">Breaking down the intricate components that bring a mechanical watch to life, from the mainspring to the escapement.</p>
+      <p class="article-excerpt">Breaking down the intricate components that bring a mechanical watch to life, from the
+        mainspring to the escapement.</p>
       <div class="article-date">September 12, 2024</div>
     </a>
 
     <!-- Article 6 -->
     <a href="#" class="article-card">
       <div class="article-image-wrapper">
-        <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=2070&auto=format&fit=crop" alt="Independent Watchmakers" class="article-image">
+        <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=2070&auto=format&fit=crop"
+          alt="Independent Watchmakers" class="article-image">
       </div>
       <span class="category-tag">Brand Stories</span>
       <h3 class="article-title">The Rise of Independent Watchmakers in the 21st Century</h3>
-      <p class="article-excerpt">How small, artisanal brands are challenging industry giants with unconventional designs and uncompromising finishing.</p>
+      <p class="article-excerpt">How small, artisanal brands are challenging industry giants with unconventional designs
+        and uncompromising finishing.</p>
       <div class="article-date">September 05, 2024</div>
     </a>
   </section>
@@ -803,7 +883,8 @@
     <div class="footer-grid">
       <div class="footer-col">
         <h2 class="serif" style="color: var(--ivory); margin-bottom: 20px;">LUXE TIME</h2>
-        <p>Curators of fine timepieces. We believe that a watch is more than an accessory; it is a legacy passed down through generations. Authenticity and excellence guaranteed.</p>
+        <p>Curators of fine timepieces. We believe that a watch is more than an accessory; it is a legacy passed down
+          through generations. Authenticity and excellence guaranteed.</p>
         <div class="social-links">
           <a href="#"><i class="fa-brands fa-instagram"></i></a>
           <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
@@ -843,4 +924,5 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

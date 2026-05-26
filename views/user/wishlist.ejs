@@ -265,6 +265,27 @@
         
         @media (min-width: 992px) {
         }
+        /* Mobile Offcanvas Overrides */
+        .offcanvas {
+            background-color: #1A1A1A !important;
+            color: #F5F1EB !important;
+        }
+        .offcanvas .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
+        }
+        .offcanvas a {
+            color: #F5F1EB !important;
+            text-decoration: none;
+        }
+        .offcanvas-body > a {
+            font-family: 'Marcellus', serif;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+        .offcanvas a:hover {
+            color: #d4af37 !important;
+        }
     </style>
 </head>
 <body>
@@ -305,26 +326,26 @@
     </nav>
 
     <!-- Mobile Offcanvas Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu" style="background-color: var(--dark); color: var(--light-bg);">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="mobileMenu">
         <div class="offcanvas-header border-bottom border-secondary">
             <h5 class="offcanvas-title serif">LUXE TIME</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close" style="filter: invert(1) grayscale(100%) brightness(200%);"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column text-center mt-5">
-            <a href="/" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Home</a>
-            <a href="/shope" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Shop</a>
-            <a href="/shope" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Collections</a>
-            <a href="/blog" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Blog</a>
-            <a href="/contact" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Contact</a>
-            <a href="/cart" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Cart</a>
-            <a href="/wishlist" style="color: var(--light-bg); font-family: 'Marcellus', serif; font-size: 1.5rem; margin-bottom: 20px; display: block; text-decoration: none;">Wishlist</a>
+            <a href="/">Home</a>
+            <a href="/shope">Shop</a>
+            <a href="/shope">Collections</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+            <a href="/cart">Cart</a>
+            <a href="/wishlist">Wishlist</a>
             <hr class="border-secondary my-4">
             <div class="d-flex justify-content-center gap-4 mt-3">
-                <a onclick="document.getElementById('searchOverlay').classList.add('active');" style="color: var(--light-bg); font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></a>
-                <a href="/wishlist" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-regular fa-heart"></i></a>
-                <a href="/cart" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-regular fa-user"></i></a>
-                <% if (typeof user !== 'undefined' && user) { %> <a href="/logout" style="color: var(--light-bg); font-size: 1.2rem;"><i class="fa-solid fa-right-from-bracket"></i></a> <% } %>
+                <a onclick="document.getElementById('searchOverlay').classList.add('active');" style="cursor: pointer;"><i class="fa-solid fa-magnifying-glass"></i></a>
+                <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
+                <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
+                <% if (typeof user !== 'undefined' && user) { %> <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a> <% } %>
             </div>
         </div>
     </div>

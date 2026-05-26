@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order History</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="/styles/ordersHistory.css">
@@ -142,29 +144,33 @@
                 display: block;
             }
         }
-        
+
         /* Mobile Offcanvas Overrides */
         .offcanvas {
             background-color: #1A1A1A;
             color: #F5F1EB;
         }
+
         .offcanvas .btn-close {
             filter: invert(1) grayscale(100%) brightness(200%);
         }
+
         .offcanvas a {
             color: #F5F1EB;
             text-decoration: none;
         }
-        .offcanvas-body > a {
+
+        .offcanvas-body>a {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             margin-bottom: 20px;
             display: block;
         }
+
         .offcanvas a:hover {
             color: #C5A66E;
         }
-        
+
         .account-container {
             margin-top: 0 !important;
         }
@@ -182,7 +188,9 @@
     <!-- 2. Navigation -->
     <nav class="navbar-luxury">
         <div class="navbar-brand">
-            <a href="/"><h1>LUXE TIME</h1></a>
+            <a href="/">
+                <h1>LUXE TIME</h1>
+            </a>
         </div>
         <div class="nav-links">
             <a href="/">Home</a>
@@ -195,20 +203,20 @@
             <a href="/shope" title="Search"><i class="fa-solid fa-magnifying-glass"></i></a>
             <a href="/wishlist" title="Wishlist"><i class="fa-regular fa-heart"></i></a>
             <a href="/cart" title="Cart"><i class="fa-solid fa-cart-shopping"></i></a>
-            <% if (typeof user !== 'undefined' && user) { %>
+            <% if (typeof user !=='undefined' && user) { %>
                 <a href="/profile" title="Profile">
-                    <% if (user.image && user.image.length > 0) { %>
+                    <% if (user.image && user.image.length> 0) { %>
                         <img src="<%= user.image[0] %>" alt="Profile" class="profile-img-nav">
-                    <% } else { %>
-                        <i class="fa-regular fa-user"></i>
-                    <% } %>
+                        <% } else { %>
+                            <i class="fa-regular fa-user"></i>
+                            <% } %>
                 </a>
                 <a href="/logout" title="Logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-            <% } else { %>
-                <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
-            <% } %>
+                <% } else { %>
+                    <a href="/login" title="Login"><i class="fa-regular fa-user"></i></a>
+                    <% } %>
         </div>
-        
+
         <button class="mobile-menu-btn" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
             <i class="fa-solid fa-bars"></i>
         </button>
@@ -233,10 +241,11 @@
                 <a href="/shope"><i class="fa-solid fa-magnifying-glass"></i></a>
                 <a href="/wishlist"><i class="fa-regular fa-heart"></i></a>
                 <a href="/cart"><i class="fa-solid fa-cart-shopping"></i></a>
-                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i class="fa-regular fa-user"></i></a>
-                <% if (typeof user !== 'undefined' && user) { %>
+                <a href="<%= (typeof user !== 'undefined' && user) ? '/profile' : '/login' %>"><i
+                        class="fa-regular fa-user"></i></a>
+                <% if (typeof user !=='undefined' && user) { %>
                     <a href="/logout"><i class="fa-solid fa-right-from-bracket"></i></a>
-                <% } %>
+                    <% } %>
             </div>
         </div>
     </div>
@@ -317,8 +326,9 @@
                                                 , month: 'long' , day: 'numeric' }) %>
                                         </span>
                                     </div>
-                                    <div class="status-badge status-<%= (order.paymentStatus || 'pending').toLowerCase() %>">
-                                        
+                                    <div
+                                        class="status-badge status-<%= (order.paymentStatus || 'pending').toLowerCase() %>">
+
                                         <%= order.paymentStatus || 'Pending' %>
                                     </div>
                                 </div>
@@ -329,22 +339,26 @@
                                             <h4>
                                                 <%= order.productName %>
                                             </h4>
-                                            <p class="color">Color: <%= order.color %></p>
-                                            <p class="quantity">Qty: <%= order.quantity %></p>
-                                
+                                            <p class="color">Color: <%= order.color %>
+                                            </p>
+                                            <p class="quantity">Qty: <%= order.quantity %>
+                                            </p>
+
                                             <p class="address" hidden>
                                                 <%= address %>
                                             </p>
-                                
-                                            <p class="price">$<%= order.totalAmount?.toFixed(2) %></p>
-                                
-                                            <% if (order.paymentMethod === 'razorpay') { %>
-                                                <p class="status">Status: <%= order.status || 'Pending' %></p>
-                                            <% } %>
+
+                                            <p class="price">$<%= order.totalAmount?.toFixed(2) %>
+                                            </p>
+
+                                            <% if (order.paymentMethod==='razorpay' ) { %>
+                                                <p class="status">Status: <%= order.status || 'Pending' %>
+                                                </p>
+                                                <% } %>
                                         </div>
                                     </div>
                                 </div>
-                                
+
 
                                 <div class="order-card-footer">
                                     <div class="action-buttons d-flex align-items-center gap-2">
@@ -352,31 +366,33 @@
                                             onclick="showTrackingModal('<%= order.individualOrdersId %>')">
                                             <i class="fas fa-truck"></i> Track
                                         </button>
-                                        <% if (order.paymentStatus === 'Payment Failed') { %>
-                                            <button class="btn btn-outline-success" onclick="handlePayment('<%= order.orderId %>', '<%= order.totalAmount %>')">
+                                        <% if (order.paymentStatus==='Payment Failed' ) { %>
+                                            <button class="btn btn-outline-success"
+                                                onclick="handlePayment('<%= order.orderId %>', '<%= order.totalAmount %>')">
                                                 <i class="fas fa-credit-card"></i> Pay Now
-                                            </button>
-                                        <% } %>
-                                        <% if (order.status === 'Delivered') { %>
-                                            <button class="btn btn-outline-secondary"
-                                                onclick="generateInvoice('<%= order.individualOrdersId %>')">
-                                                <i class="fas fa-download"></i> Invoice
-                                            </button>
-                                        <% } %>
-                                        <% if (order.status !=='Delivered' && order.status !=='Cancelled' &&
-                                            order.status !=='Returned' && order.status !=='Return Approved' &&
-                                            order.status !=='Return Canceled' ) { %>
-                                            <button type="button" class="btn btn-outline-danger"
-                                                onclick="showCancelModal('<%= order.individualOrdersId %>', '<%= order.orderId %>')">
-                                                <i class="fas fa-times"></i> Cancel
                                             </button>
                                             <% } %>
                                                 <% if (order.status==='Delivered' ) { %>
-                                                    <button class="btn btn-outline-warning"
-                                                        onclick="returnOrder('<%= order.orderId %>', '<%= order.productId %>')">
-                                                        <i class="fas fa-undo"></i> Return
+                                                    <button class="btn btn-outline-secondary"
+                                                        onclick="generateInvoice('<%= order.individualOrdersId %>')">
+                                                        <i class="fas fa-download"></i> Invoice
                                                     </button>
                                                     <% } %>
+                                                        <% if (order.status !=='Delivered' && order.status
+                                                            !=='Cancelled' && order.status !=='Returned' && order.status
+                                                            !=='Return Approved' && order.status !=='Return Canceled' )
+                                                            { %>
+                                                            <button type="button" class="btn btn-outline-danger"
+                                                                onclick="showCancelModal('<%= order.individualOrdersId %>', '<%= order.orderId %>')">
+                                                                <i class="fas fa-times"></i> Cancel
+                                                            </button>
+                                                            <% } %>
+                                                                <% if (order.status==='Delivered' ) { %>
+                                                                    <button class="btn btn-outline-warning"
+                                                                        onclick="returnOrder('<%= order.orderId %>', '<%= order.productId %>')">
+                                                                        <i class="fas fa-undo"></i> Return
+                                                                    </button>
+                                                                    <% } %>
                                     </div>
                                 </div>
                             </div>
@@ -613,18 +629,18 @@
                 const addressText = document.querySelector('.address').textContent.trim();
 
                 const fixedAddressText = addressText
-                    .replace(/(\w+):/g, '"$1":') 
-                    .replace(/'/g, '"');          
+                    .replace(/(\w+):/g, '"$1":')
+                    .replace(/'/g, '"');
 
                 const address = JSON.parse(fixedAddressText);
 
 
 
-                
+
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
 
-                
+
                 doc.setProperties({
                     title: `Invoice - ${orderNumber}`,
                     subject: 'Order Invoice',
@@ -632,37 +648,37 @@
                     creator: 'LUXE TIME Store'
                 });
 
-                
+
                 doc.setFontSize(24);
                 doc.setTextColor(26, 26, 26);
                 doc.text('LUXE TIME', 20, 20);
 
-                
+
                 doc.setFillColor(26, 26, 26);
                 doc.circle(95, 17, 1, 'F');
 
-                
+
                 doc.setFontSize(20);
                 doc.text('INVOICE', 20, 40);
 
-                
+
                 doc.setFontSize(10);
                 doc.setTextColor(102, 102, 102);
                 doc.text(`Order Number: ${orderNumber}`, 20, 55);
                 doc.text(`Date: ${orderDate}`, 20, 62);
 
-                
+
                 doc.setDrawColor(230, 230, 230);
                 doc.line(20, 70, 190, 70);
 
-                
+
                 doc.setFontSize(12);
                 doc.setTextColor(26, 26, 26);
                 doc.text('Billing & Shipping Details', 20, 75);
 
-                
+
                 const addressHeaders = [['Details', 'Information']];
-                
+
                 const addressData = [
                     ['Full Name', address?.fullName || 'N/A'],
                     ['Phone', address?.phone || 'N/A'],
@@ -672,7 +688,7 @@
                     ['Zip Code', address?.zipCode || 'N/A']
                 ];
 
-                
+
                 doc.autoTable({
                     startY: 80,
                     head: addressHeaders,
@@ -693,12 +709,12 @@
                     }
                 });
 
-               
+
                 const productStartY = doc.lastAutoTable.finalY + 20;
                 doc.setFontSize(12);
                 doc.text('Order Details', 20, productStartY - 10);
 
-               
+
                 const headers = [['Product', 'Color', 'Quantity', 'Price']];
                 const data = [[
                     productName,
@@ -707,7 +723,7 @@
                     totalAmount
                 ]];
 
-                
+
                 doc.autoTable({
                     startY: productStartY,
                     head: headers,
@@ -724,29 +740,29 @@
                     }
                 });
 
-                
+
                 const finalY = doc.lastAutoTable.finalY + 10;
                 doc.setFontSize(10);
                 doc.setTextColor(26, 26, 26);
-           
 
-                
-             
 
-                
-                const total = parseFloat(totalAmount.replace('$', '')) ;
+
+
+
+
+                const total = parseFloat(totalAmount.replace('$', ''));
                 doc.setFontSize(12);
                 doc.setFont(undefined, 'bold');
                 doc.text('Total:', 140, finalY + 15);
                 doc.text(`$${total.toFixed(2)}`, 180, finalY + 15, { align: 'right' });
 
-                
+
                 doc.setFontSize(8);
                 doc.setTextColor(128, 128, 128);
                 doc.text('Thank you for shopping with LUXE TIME', 20, 270);
                 doc.text('For any queries, please contact support@luxetime.com', 20, 275);
 
-                
+
                 doc.save(`invoice-${orderNumber.toLowerCase()}.pdf`);
 
             } catch (error) {
@@ -770,91 +786,91 @@
                 confirmButtonText: 'Pay Now'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    
+
                     fetch(`/create-order/${orderId}`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         }
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (!data.key_id) {
-                            throw new Error('Missing Razorpay key');
-                        }
-
-                        const options = {
-                            key: data.key_id,
-                            amount: data.amount,
-                            currency: data.currency,
-                            name: 'LUXE TIME',
-                            description: 'Order Payment',
-                            order_id: data.order_id,
-                            handler: function (response) {
-                                
-                                fetch('/verify-failPayment', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                        razorpay_payment_id: response.razorpay_payment_id,
-                                        razorpay_order_id: response.razorpay_order_id,
-                                        razorpay_signature: response.razorpay_signature,
-                                        order_id: orderId
-                                    })
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.success) {
-                                        Swal.fire({
-                                            icon: 'success',
-                                            title: 'Payment Successful!',
-                                            text: 'Your order has been confirmed.',
-                                            showConfirmButton: false,
-                                            timer: 1500
-                                        }).then(() => {
-                                            location.reload();
-                                        });
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Verification error:', error);
-                                    Swal.fire({
-                                        icon: 'error',
-                                        title: 'Verification Failed',
-                                        text: 'Please contact support if amount is deducted'
-                                    });
-                                });
-                            },
-                            prefill: {
-                                name: data.customerName || '',
-                                email: data.email || '',
-                                contact: data.phone || ''
-                            },
-                            theme: {
-                                color: '#3399cc'
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.key_id) {
+                                throw new Error('Missing Razorpay key');
                             }
-                        };
 
-                        const rzp = new Razorpay(options);
-                        rzp.on('payment.failed', function (response){
+                            const options = {
+                                key: data.key_id,
+                                amount: data.amount,
+                                currency: data.currency,
+                                name: 'LUXE TIME',
+                                description: 'Order Payment',
+                                order_id: data.order_id,
+                                handler: function (response) {
+
+                                    fetch('/verify-failPayment', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            razorpay_payment_id: response.razorpay_payment_id,
+                                            razorpay_order_id: response.razorpay_order_id,
+                                            razorpay_signature: response.razorpay_signature,
+                                            order_id: orderId
+                                        })
+                                    })
+                                        .then(response => response.json())
+                                        .then(data => {
+                                            if (data.success) {
+                                                Swal.fire({
+                                                    icon: 'success',
+                                                    title: 'Payment Successful!',
+                                                    text: 'Your order has been confirmed.',
+                                                    showConfirmButton: false,
+                                                    timer: 1500
+                                                }).then(() => {
+                                                    location.reload();
+                                                });
+                                            }
+                                        })
+                                        .catch(error => {
+                                            console.error('Verification error:', error);
+                                            Swal.fire({
+                                                icon: 'error',
+                                                title: 'Verification Failed',
+                                                text: 'Please contact support if amount is deducted'
+                                            });
+                                        });
+                                },
+                                prefill: {
+                                    name: data.customerName || '',
+                                    email: data.email || '',
+                                    contact: data.phone || ''
+                                },
+                                theme: {
+                                    color: '#3399cc'
+                                }
+                            };
+
+                            const rzp = new Razorpay(options);
+                            rzp.on('payment.failed', function (response) {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Payment Failed',
+                                    text: 'The payment process failed. Please try again.'
+                                });
+                            });
+                            rzp.open();
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Payment Failed',
-                                text: 'The payment process failed. Please try again.'
+                                title: 'Error',
+                                text: 'Failed to initiate payment. Please try again.'
                             });
                         });
-                        rzp.open();
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Error',
-                            text: 'Failed to initiate payment. Please try again.'
-                        });
-                    });
                 }
             });
         }
@@ -1049,7 +1065,7 @@
                 });
             });
 
-            
+
             const invoiceButtons = document.querySelectorAll('.btn-outline-secondary');
             invoiceButtons.forEach(button => {
                 button.onclick = function () {
